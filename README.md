@@ -1,4 +1,6 @@
-# Small-Business Financial Insights — Portable AI Agent Skill & Interactive Books
+# AI Small-Business Books — Portable Agent Skill & Interactive Financial Overview
+
+**[Launch Live Interactive Demo →](https://heelaree.github.io/ai-small-business-books/)**
 
 A portable **`SKILL.md` agent skill** and deterministic reporting engine that transforms raw small-business bank statements into **clear, progressive-disclosure financial insights**—built so non-accountant founders can understand their money in seconds while keeping full audit-grade books for their accountant.
 
