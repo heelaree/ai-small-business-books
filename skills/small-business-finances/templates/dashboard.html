@@ -1,0 +1,1950 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{{PAGE_TITLE}}</title>
+<style>
+  :root {
+    --bg: #f8fafc;
+    --surface: #ffffff;
+    --surface-subtle: #f1f5f9;
+    --border: #e2e8f0;
+    --border-strong: #cbd5e1;
+    --ink: #0f172a;
+    --ink-secondary: #475569;
+    --ink-muted: #64748b;
+    --primary: #1e40af;
+    --primary-light: #dbeafe;
+    --emerald: #059669;
+    --emerald-bg: #ecfdf5;
+    --emerald-border: #a7f3d0;
+    --rose: #dc2626;
+    --rose-bg: #fef2f2;
+    --rose-border: #fecaca;
+    --amber: #b45309;
+    --amber-bg: #fffbeb;
+    --amber-border: #fde68a;
+    --slate-accent: #334155;
+    --radius: 12px;
+    --radius-sm: 8px;
+    --shadow: 0 1px 3px rgba(15, 23, 42, 0.06), 0 1px 2px rgba(15, 23, 42, 0.04);
+    --shadow-lg: 0 10px 25px -5px rgba(15, 23, 42, 0.12), 0 8px 10px -6px rgba(15, 23, 42, 0.08);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.5;
+    font-size: 14px;
+    -webkit-font-smoothing: antialiased;
+  }
+  .num { font-variant-numeric: tabular-nums; font-feature-settings: "tnum" 1; }
+  .pos { color: var(--emerald); }
+  .neg { color: var(--rose); }
+  .muted { color: var(--ink-muted); }
+
+  /* Header */
+  .topbar {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    z-index: 30;
+  }
+  .topbar-inner {
+    max-width: 1360px;
+    margin: 0 auto;
+    padding: 14px 24px 0;
+  }
+  .brand-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 16px;
+    flex-wrap: wrap;
+    padding-bottom: 12px;
+  }
+  .brand-title {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .brand-mark {
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #0f172a 0%, #1e40af 100%);
+    color: #fff;
+    font-weight: 700;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    letter-spacing: -0.5px;
+  }
+  .brand-title h1 {
+    font-size: 19px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+  .brand-subtitle {
+    font-size: 12.5px;
+    color: var(--ink-secondary);
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 2px 9px;
+    border-radius: 999px;
+    font-size: 11.5px;
+    font-weight: 600;
+  }
+  .badge-amber { background: var(--amber-bg); color: var(--amber); border: 1px solid var(--amber-border); }
+  .badge-emerald { background: var(--emerald-bg); color: var(--emerald); border: 1px solid var(--emerald-border); }
+  .badge-slate { background: var(--surface-subtle); color: var(--ink-secondary); border: 1px solid var(--border); }
+  .badge-blue { background: var(--primary-light); color: var(--primary); border: 1px solid #bfdbfe; }
+
+  .header-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  select, input[type="text"], input[type="search"] {
+    padding: 7px 11px;
+    border: 1px solid var(--border-strong);
+    border-radius: var(--radius-sm);
+    background: var(--surface);
+    color: var(--ink);
+    font-size: 13px;
+    outline: none;
+  }
+  select:focus, input:focus { border-color: var(--primary); box-shadow: 0 0 0 2px rgba(30,64,175,0.12); }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 7px 13px;
+    border-radius: var(--radius-sm);
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    border: 1px solid var(--border-strong);
+    background: var(--surface);
+    color: var(--ink);
+    transition: all 0.15s ease;
+  }
+  .btn:hover { background: var(--surface-subtle); }
+  .btn-primary { background: var(--primary); color: #fff; border-color: var(--primary); }
+  .btn-primary:hover { background: #1e3a8a; }
+  .btn-amber { background: var(--amber); color: #fff; border-color: var(--amber); }
+  .btn-amber:hover { background: #92400e; }
+  .btn-sm { padding: 4px 9px; font-size: 12px; }
+
+  /* Tabs */
+  .nav-tabs {
+    display: flex;
+    gap: 6px;
+    overflow-x: auto;
+  }
+  .nav-tab {
+    padding: 10px 16px;
+    font-size: 13.5px;
+    font-weight: 600;
+    color: var(--ink-secondary);
+    background: none;
+    border: none;
+    border-bottom: 2.5px solid transparent;
+    cursor: pointer;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+  }
+  .nav-tab:hover { color: var(--ink); }
+  .nav-tab.active {
+    color: var(--primary);
+    border-bottom-color: var(--primary);
+  }
+
+  /* Main container */
+  .container {
+    max-width: 1360px;
+    margin: 0 auto;
+    padding: 22px 24px 64px;
+  }
+  .tab-panel { display: none; }
+  .tab-panel.active { display: block; }
+
+  /* Alert / Callout Banner */
+  .callout {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    padding: 14px 18px;
+    border-radius: var(--radius);
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+  }
+  .callout-amber {
+    background: var(--amber-bg);
+    border: 1px solid var(--amber-border);
+    color: #78350f;
+  }
+  .callout-blue {
+    background: #eff6ff;
+    border: 1px solid #bfdbfe;
+    color: #1e3a8a;
+  }
+  .callout strong { font-weight: 700; }
+
+  /* KPI Grid */
+  .kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-bottom: 20px;
+  }
+  @media (max-width: 980px) { .kpi-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 560px) { .kpi-grid { grid-template-columns: 1fr; } }
+
+  .kpi-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 18px 20px;
+    box-shadow: var(--shadow);
+    cursor: pointer;
+    transition: transform 0.12s ease, border-color 0.12s ease, box-shadow 0.12s ease;
+    position: relative;
+  }
+  .kpi-card:hover {
+    transform: translateY(-1px);
+    border-color: #93c5fd;
+    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08);
+  }
+  .kpi-label {
+    font-size: 12.5px;
+    font-weight: 600;
+    color: var(--ink-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .kpi-hint {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--primary);
+    text-transform: none;
+    letter-spacing: 0;
+    opacity: 0.8;
+  }
+  .kpi-value {
+    font-size: 25px;
+    font-weight: 700;
+    margin: 8px 0 6px;
+    letter-spacing: -0.02em;
+  }
+  .kpi-sub {
+    font-size: 12.5px;
+    color: var(--ink-muted);
+  }
+
+  /* Charts Grid */
+  .charts-grid {
+    display: grid;
+    grid-template-columns: 1.35fr 1fr;
+    gap: 18px;
+    margin-bottom: 22px;
+  }
+  @media (max-width: 1024px) { .charts-grid { grid-template-columns: 1fr; } }
+
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+    margin-bottom: 22px;
+  }
+  .charts-grid .card { margin-bottom: 0; }
+  .card-header {
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .card-title { font-size: 15px; font-weight: 700; color: var(--ink); }
+  .card-subtitle { font-size: 12.5px; color: var(--ink-muted); margin-top: 2px; }
+  .card-body { padding: 18px 20px; }
+
+  /* Tables */
+  .table-wrap { overflow-x: auto; }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13.5px;
+  }
+  th {
+    background: var(--surface-subtle);
+    color: var(--ink-secondary);
+    font-weight: 600;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    padding: 10px 14px;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+    white-space: nowrap;
+  }
+  th.right, td.right { text-align: right; }
+  td {
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: middle;
+  }
+  tr.drill-row { cursor: pointer; transition: background 0.1s ease; }
+  tr.drill-row:hover { background: #f8fafc; }
+  tr.drill-row td.cell-clickable:hover {
+    background: #eff6ff;
+    text-decoration: underline;
+  }
+  tr.row-subtotal {
+    background: #f8fafc;
+    font-weight: 700;
+  }
+  tr.row-subtotal td { border-top: 1px solid var(--border-strong); border-bottom: 1px solid var(--border-strong); }
+  tr.row-highlight {
+    background: #eff6ff;
+    font-weight: 700;
+    font-size: 14px;
+  }
+  tr.row-highlight td { border-top: 2px solid #93c5fd; border-bottom: 2px solid #93c5fd; }
+  tr.row-bridge {
+    background: #fffbeb;
+    color: #78350f;
+    font-style: italic;
+  }
+  tr.row-subcat {
+    background: #fcfdff;
+    font-size: 13px;
+    color: var(--ink-secondary);
+  }
+  tr.row-subcat td:first-child { padding-left: 38px; }
+
+  .expand-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    border-radius: 4px;
+    border: 1px solid var(--border-strong);
+    background: var(--surface);
+    color: var(--ink-secondary);
+    font-size: 11px;
+    margin-right: 8px;
+    cursor: pointer;
+    vertical-align: middle;
+  }
+  .expand-btn:hover { background: var(--primary-light); color: var(--primary); }
+  .inspect-pill {
+    display: inline-block;
+    font-size: 11px;
+    padding: 1px 7px;
+    border-radius: 99px;
+    background: var(--surface-subtle);
+    color: var(--ink-muted);
+    margin-left: 8px;
+    font-weight: 500;
+    font-style: normal;
+  }
+  tr.drill-row:hover .inspect-pill { background: var(--primary-light); color: var(--primary); }
+
+  /* Cost Horizontal Bars */
+  .cost-bar-list { display: flex; flex-direction: column; gap: 13px; }
+  .cost-bar-item { cursor: pointer; padding: 6px 8px; border-radius: 8px; transition: background 0.12s; }
+  .cost-bar-item:hover { background: var(--surface-subtle); }
+  .cost-bar-top { display: flex; justify-content: space-between; font-size: 13px; font-weight: 600; margin-bottom: 5px; gap: 8px; }
+  .cost-bar-track { height: 9px; background: var(--surface-subtle); border-radius: 99px; overflow: hidden; }
+  .cost-bar-fill { height: 100%; border-radius: 99px; transition: width 0.3s ease; }
+
+  /* Health Report Grids */
+  .health-grid-2 {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
+    margin-bottom: 20px;
+  }
+  @media (max-width: 860px) { .health-grid-2 { grid-template-columns: 1fr; } }
+  .metric-list { display: flex; flex-direction: column; gap: 10px; }
+  .metric-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding-bottom: 9px;
+    border-bottom: 1px dashed var(--border);
+    gap: 12px;
+  }
+  .metric-row:last-child { border-bottom: none; padding-bottom: 0; }
+  .progress-pair { margin-top: 10px; }
+  .progress-label { display: flex; justify-content: space-between; font-size: 12.5px; margin-bottom: 4px; font-weight: 600; }
+
+  /* Slide-over Drawer */
+  .drawer-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(15, 23, 42, 0.42);
+    z-index: 90;
+    display: none;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+  }
+  .drawer-backdrop.open { display: block; opacity: 1; }
+  .drawer {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: min(780px, 96vw);
+    background: var(--surface);
+    z-index: 100;
+    box-shadow: var(--shadow-lg);
+    transform: translateX(100%);
+    transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+    display: flex;
+    flex-direction: column;
+  }
+  .drawer.open { transform: translateX(0); }
+  .drawer-header {
+    padding: 18px 22px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 16px;
+  }
+  .drawer-body {
+    padding: 16px 22px 28px;
+    overflow-y: auto;
+    flex: 1;
+  }
+  .chip-list { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 14px; }
+  .chip {
+    font-size: 12px;
+    padding: 4px 10px;
+    border-radius: 99px;
+    border: 1px solid var(--border);
+    background: var(--surface-subtle);
+    cursor: pointer;
+  }
+  .chip.active { background: var(--primary); color: #fff; border-color: var(--primary); }
+
+  /* Tooltip */
+  #svg-tooltip {
+    position: fixed;
+    pointer-events: none;
+    background: #0f172a;
+    color: #fff;
+    padding: 9px 12px;
+    border-radius: 8px;
+    font-size: 12px;
+    z-index: 120;
+    display: none;
+    box-shadow: var(--shadow-lg);
+    max-width: 260px;
+  }
+
+  /* Print styles for Financial Health Report */
+  @media print {
+    .topbar, .no-print, .drawer, .drawer-backdrop { display: none !important; }
+    body { background: #fff; }
+    .container { padding: 0; max-width: 100%; }
+    .card { box-shadow: none; break-inside: avoid; margin-bottom: 16px; }
+  }
+</style>
+</head>
+<body>
+
+<div id="svg-tooltip"></div>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <div class="brand-row">
+      <div class="brand-title">
+        <div class="brand-mark" id="brand-initials">SB</div>
+        <div>
+          <h1 id="biz-title">Business Financial Overview</h1>
+          <div class="brand-subtitle">
+            <span id="biz-meta">Cash-Basis Books</span>
+            <span id="status-badge" class="badge badge-amber">Provisional</span>
+            <span id="override-badge" class="badge badge-blue" style="display:none;"></span>
+          </div>
+        </div>
+      </div>
+      <div class="header-actions no-print">
+        <label for="period-select" class="muted" style="font-size:12.5px;font-weight:600;">Period:</label>
+        <select id="period-select" aria-label="Select reporting period"></select>
+        <button class="btn btn-sm" id="btn-export-json" title="Download owner classifications JSON for your AI agent">Export Tags JSON</button>
+        <button class="btn btn-sm" onclick="window.print()" title="Print or save current view as PDF">Print / PDF</button>
+      </div>
+    </div>
+
+    <nav class="nav-tabs no-print" role="tablist">
+      <button class="nav-tab active" data-tab="overview" role="tab">Overview &amp; Short P&amp;L</button>
+      <button class="nav-tab" data-tab="health" role="tab">Financial Health &amp; Cost Report</button>
+      <button class="nav-tab" data-tab="classify" role="tab">
+        Classify Unknowns <span id="unclass-tab-count" class="badge badge-amber">0</span>
+      </button>
+      <button class="nav-tab" data-tab="detailed" role="tab">Detailed P&amp;L &amp; Full Ledger</button>
+    </nav>
+  </div>
+</header>
+
+<main class="container">
+  <!-- TAB 1: OVERVIEW & SHORT P&L -->
+  <section id="tab-overview" class="tab-panel active">
+    <div id="unclassified-banner" class="callout callout-amber" style="display:none;"></div>
+
+    <div class="kpi-grid" id="kpi-grid"></div>
+
+    <div class="charts-grid">
+      <div class="card">
+        <div class="card-header">
+          <div>
+            <div class="card-title">Money Made vs. Costs Over Time</div>
+            <div class="card-subtitle">Click or double-click any month bar to inspect its bank transactions</div>
+          </div>
+          <div style="display:flex;gap:12px;font-size:12px;align-items:center;">
+            <span><span style="display:inline-block;width:10px;height:10px;background:#059669;border-radius:2px;margin-right:4px;"></span>Revenue</span>
+            <span><span style="display:inline-block;width:10px;height:10px;background:#dc2626;border-radius:2px;margin-right:4px;"></span>Total Costs</span>
+            <span><span style="display:inline-block;width:10px;height:3px;background:#1e40af;vertical-align:middle;margin-right:4px;"></span>Net Result</span>
+          </div>
+        </div>
+        <div class="card-body" id="monthly-chart-box" style="min-height:270px;"></div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <div>
+            <div class="card-title">Where Classified Costs Go</div>
+            <div class="card-subtitle">Click or double-click any cost bar to see exact payments</div>
+          </div>
+        </div>
+        <div class="card-body" id="cost-bars-box"></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div>
+          <div class="card-title">Summary Profit &amp; Loss (Short P&amp;L) &amp; Cash Bridge</div>
+          <div class="card-subtitle">Click <strong>[+]</strong> to expand subcategories, or <strong>double-click any row / amount</strong> to view underlying bank transactions</div>
+        </div>
+        <div class="no-print" style="display:flex;gap:8px;align-items:center;">
+          <label style="font-size:12.5px;color:var(--ink-secondary);display:flex;align-items:center;gap:6px;cursor:pointer;">
+            <input type="checkbox" id="toggle-monthly-cols"> Show month-by-month columns
+          </label>
+          <button class="btn btn-sm" id="btn-expand-all">Expand All</button>
+        </div>
+      </div>
+      <div class="table-wrap" id="short-pnl-wrap"></div>
+    </div>
+  </section>
+
+  <!-- TAB 2: FINANCIAL HEALTH & COST REPORT (STRICTLY FACTUAL) -->
+  <section id="tab-health" class="tab-panel">
+    <div class="callout callout-blue">
+      <div>
+        <strong>Objective Financial Health &amp; Cost Structure Report</strong> — Strictly factual diagnostic summary of cash positions, cost concentration, monthly rhythm, banking friction, and record completeness. Contains no financial advice or recommendations.
+      </div>
+      <button class="btn btn-sm no-print" onclick="window.print()">Print Report</button>
+    </div>
+    <div id="health-report-container"></div>
+  </section>
+
+  <!-- TAB 3: CLASSIFY UNKNOWNS (INTERACTIVE WORKSPACE) -->
+  <section id="tab-classify" class="tab-panel">
+    <div class="card" style="border-color:#93c5fd;background:#f8fbff;">
+      <div class="card-body" id="live-impact-strip"></div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div>
+          <div class="card-title">Label Unclassified Bank Transactions</div>
+          <div class="card-subtitle">Group recurring senders/recipients to update multiple rows at once, then export <code>classifications.json</code> for your AI agent</div>
+        </div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;">
+          <select id="classify-mode-select">
+            <option value="groups">Smart Counterparty Groups (Fastest)</option>
+            <option value="items">Individual Transactions</option>
+          </select>
+          <select id="classify-filter-select">
+            <option value="open">Needs Label Only</option>
+            <option value="all">All Review Items (Including Tagged)</option>
+          </select>
+          <label class="btn btn-sm" style="margin:0;">
+            Import JSON <input type="file" id="import-json-input" accept=".json" style="display:none;">
+          </label>
+          <button class="btn btn-sm btn-primary" id="btn-export-json-2">Export classifications.json</button>
+          <button class="btn btn-sm" id="btn-reset-tags">Reset Drafts</button>
+        </div>
+      </div>
+      <div class="table-wrap" id="classify-table-wrap"></div>
+    </div>
+  </section>
+
+  <!-- TAB 4: DETAILED P&L & FULL LEDGER -->
+  <section id="tab-detailed" class="tab-panel">
+    <div style="display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap;align-items:center;" class="no-print">
+      <button class="btn btn-primary" id="subtab-btn-pnl">Detailed Monthly P&amp;L</button>
+      <button class="btn" id="subtab-btn-ledger">Searchable Master Ledger</button>
+    </div>
+
+    <div id="subpanel-pnl" class="card">
+      <div class="card-header">
+        <div>
+          <div class="card-title">Detailed Profit &amp; Loss (All Categories by Month)</div>
+          <div class="card-subtitle">Full accounting schedule with Gross Profit, Operating Profit, and double-click transaction drill-down</div>
+        </div>
+      </div>
+      <div class="table-wrap" id="detailed-pnl-wrap"></div>
+    </div>
+
+    <div id="subpanel-ledger" class="card" style="display:none;">
+      <div class="card-header">
+        <div>
+          <div class="card-title">Master Cash Ledger</div>
+          <div class="card-subtitle">Every bank transaction and embedded fee split, reconciled to statement balances</div>
+        </div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;">
+          <input type="search" id="ledger-search" placeholder="Search narration, ref, ID..." style="width:230px;">
+          <select id="ledger-sec-filter"><option value="ALL">All Sections</option></select>
+          <select id="ledger-acct-filter"><option value="ALL">All Accounts</option></select>
+          <button class="btn btn-sm" id="btn-export-csv">Download CSV</button>
+        </div>
+      </div>
+      <div class="table-wrap" id="ledger-table-wrap"></div>
+    </div>
+  </section>
+</main>
+
+<!-- SLIDE-OVER TRANSACTION INSPECTOR DRAWER -->
+<div class="drawer-backdrop" id="drawer-backdrop"></div>
+<aside class="drawer" id="txn-drawer" aria-label="Transaction Inspector">
+  <div class="drawer-header">
+    <div>
+      <div class="badge badge-blue" id="drawer-badge" style="margin-bottom:6px;">Component Drill-Down</div>
+      <h2 id="drawer-title" style="font-size:17px;font-weight:700;">Transactions</h2>
+      <div id="drawer-subtitle" class="muted" style="font-size:12.5px;margin-top:2px;"></div>
+    </div>
+    <button class="btn btn-sm" id="drawer-close">Close ✕</button>
+  </div>
+  <div class="drawer-body">
+    <div style="display:flex;justify-content:space-between;gap:10px;margin-bottom:12px;flex-wrap:wrap;">
+      <input type="search" id="drawer-search" placeholder="Filter these transactions..." style="flex:1;min-width:180px;">
+      <div id="drawer-total-pill" class="badge badge-slate num" style="font-size:13px;padding:6px 12px;"></div>
+    </div>
+    <div class="chip-list" id="drawer-subchips"></div>
+    <div class="table-wrap" id="drawer-table-wrap"></div>
+  </div>
+</aside>
+
+<script id="books-payload" type="application/json">{{BOOKS_JSON_PAYLOAD}}</script>
+<script>
+(() => {
+  const RAW = JSON.parse(document.getElementById('books-payload').textContent);
+  const PROFILE = RAW.profile;
+  const CUR = RAW.currency;
+  const SYM = RAW.currency_symbol;
+  const MONTHS = RAW.months;
+  const PARTIAL_FLAGS = RAW.month_partial_flags || {};
+  const DIRECT_LABEL = PROFILE.direct_cost_label || 'Cost of Providing Services';
+
+  const OPEX_BUCKETS = [
+    'People & Staff',
+    'Power, Fuel & Maintenance',
+    'Marketing & Promotion',
+    'Premises, Cleaning & Security',
+    'Admin, Comms & Operations'
+  ];
+  const PNL_SECTIONS = new Set(['Revenue', 'Direct costs', 'Operating expenses', 'Taxes', 'Bank fees']);
+  const NON_PNL_SECTIONS = new Set(['Unmatched own-account transfers', 'Owner transactions', 'Loans', 'Asset purchases']);
+
+  // Owner-friendly classification presets
+  const OWNER_PRESETS = [
+    { value: '', label: '— Needs Owner Label (Unclassified) —' },
+    { value: 'Revenue|Customer sales & services', label: 'Money Made: Customer Sale / Service Revenue' },
+    { value: 'Revenue|Customer receipts via agent', label: 'Money Made: Customer Settlement via POS / Agent' },
+    { value: 'Revenue|Customer refunds', label: 'Money Made: Customer Refund (reduces revenue)' },
+    { value: 'Direct costs|Service supplies & consumables', label: `Direct Cost: ${DIRECT_LABEL} — Supplies / Stock` },
+    { value: 'Direct costs|Service contractors & technicians', label: `Direct Cost: ${DIRECT_LABEL} — Contractor / Tech` },
+    { value: 'Direct costs|Packaging & delivery', label: `Direct Cost: ${DIRECT_LABEL} — Packaging / Delivery` },
+    { value: 'Operating expenses|Staff salaries', label: 'Operating Cost: Staff Salaries & Wages' },
+    { value: 'Operating expenses|Rent & space fees', label: 'Operating Cost: Rent / Space Sharing Fee' },
+    { value: 'Operating expenses|Electricity', label: 'Operating Cost: Electricity / Utility Bill' },
+    { value: 'Operating expenses|Generator fuel', label: 'Operating Cost: Fuel / Diesel' },
+    { value: 'Operating expenses|Repairs and maintenance', label: 'Operating Cost: Repairs & Maintenance' },
+    { value: 'Operating expenses|Advertising', label: 'Operating Cost: Marketing, Ads & Promotion' },
+    { value: 'Operating expenses|Cleaning', label: 'Operating Cost: Cleaning, Water & Security' },
+    { value: 'Operating expenses|Office & general admin', label: 'Operating Cost: Admin, Phone & Transport' },
+    { value: 'Operating expenses|Shared cost reimbursement', label: 'Operating Cost Offset: Shared Bill / Space Reimbursement' },
+    { value: 'Taxes|Business taxes & levies', label: 'Taxes & Levies: Government Tax / Levy' },
+    { value: 'Unmatched own-account transfers|Own-account transfer', label: 'Not P&L: Transfer Between My Business Accounts' },
+    { value: 'Owner transactions|Owner capital / drawing', label: 'Not P&L: Owner Personal Put-In or Take-Out' },
+    { value: 'Loans|Loan proceeds or repayment', label: 'Not P&L: Loan Received or Loan Repayment' },
+    { value: 'Asset purchases|Equipment & capital asset', label: 'Not P&L: Long-Term Equipment / Asset Purchase' }
+  ];
+
+  const STORAGE_KEY = `sbf_overrides_${PROFILE.legal_entity.replace(/\W+/g, '_')}_${RAW.ledger.length}`;
+  let userOverrides = {};
+  try {
+    const saved = localStorage.getItem(STORAGE_KEY);
+    if (saved) userOverrides = JSON.parse(saved) || {};
+  } catch (_) {}
+
+  // Seed with any overrides already present in classifications_config
+  if (RAW.classifications_config && RAW.classifications_config.transaction_overrides) {
+    userOverrides = { ...RAW.classifications_config.transaction_overrides, ...userOverrides };
+  }
+
+  let selectedPeriod = 'ALL';
+  let showMonthlyCols = false;
+  let expandedGroups = new Set();
+  let STATE = null;
+  let currentDrawerState = null;
+
+  function esc(s) {
+    return String(s ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  }
+
+  function fmt(val, showPlus = false) {
+    const n = Number(val || 0);
+    if (Math.abs(n) < 0.005) return `${SYM}0.00`;
+    const abs = Math.abs(n).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    if (n < 0) return `(${SYM}${abs})`;
+    return `${showPlus ? '+' : ''}${SYM}${abs}`;
+  }
+
+  function fmtCompact(val) {
+    const n = Number(val || 0);
+    const abs = Math.abs(n);
+    const sign = n < 0 ? '-' : '';
+    if (abs >= 1_000_000) return `${sign}${SYM}${(abs / 1_000_000).toFixed(2)}M`;
+    if (abs >= 1_000) return `${sign}${SYM}${(abs / 1_000).toFixed(0)}k`;
+    return `${sign}${SYM}${abs.toFixed(0)}`;
+  }
+
+  function monthName(ym, withPartial = true) {
+    if (!ym || ym === 'ALL') return 'All Months';
+    const [y, m] = ym.split('-').map(Number);
+    const d = new Date(Date.UTC(y, m - 1, 1));
+    const lbl = d.toLocaleDateString('en-US', { month: 'short', year: 'numeric', timeZone: 'UTC' });
+    return (withPartial && PARTIAL_FLAGS[ym]) ? `${lbl}*` : lbl;
+  }
+
+  function inferOpexBucket(cat) {
+    const c = String(cat || '').toLowerCase();
+    if (/salar|wage|staff|payroll|welfare|training|intern|recruit|bonus/.test(c)) return 'People & Staff';
+    if (/electric|power|fuel|diesel|generator|solar|inverter|repair|mainten/.test(c)) return 'Power, Fuel & Maintenance';
+    if (/advertis|ads|marketing|promo|sponsor|brand|social media|pr /.test(c)) return 'Marketing & Promotion';
+    if (/rent|lease|space|clean|securit|water|hygiene|sanit|waste|premise/.test(c)) return 'Premises, Cleaning & Security';
+    return 'Admin, Comms & Operations';
+  }
+
+  function inferSummaryGroup(section, category, amount) {
+    if (section === 'Revenue') return 'Revenue (Net of Refunds)';
+    if (section === 'Direct costs') return DIRECT_LABEL;
+    if (section === 'Operating expenses') return inferOpexBucket(category);
+    if (section === 'Taxes') return 'Taxes & Statutory Levies';
+    if (section === 'Bank fees') return 'Bank & Payment Fees';
+    if (section === 'Needs Review') return amount >= 0 ? 'Unclassified Receipts' : 'Unclassified Payments';
+    if (section === 'Internal transfers') return 'Matched Internal Transfers';
+    return 'Non-P&L Cash Movements';
+  }
+
+  function saveOverrides() {
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(userOverrides)); } catch (_) {}
+  }
+
+  function recomputeState() {
+    const ledger = RAW.ledger.map(orig => {
+      const e = { ...orig };
+      const ov = userOverrides[e.id];
+      if (ov && ov.section) {
+        e.section = ov.section;
+        e.category = ov.category || e.category;
+        e.user_note = ov.note || '';
+        e.is_overridden = true;
+      } else {
+        e.is_overridden = false;
+      }
+      e.summary_group = inferSummaryGroup(e.section, e.category, e.amount);
+      return e;
+    });
+
+    const periodFilter = e => selectedPeriod === 'ALL' || e.month === selectedPeriod;
+    const sumWhere = (arr, pred) => Math.round(arr.filter(pred).reduce((acc, x) => acc + x.amount, 0) * 100) / 100;
+
+    const byMonth = pred => {
+      const out = {};
+      for (const m of MONTHS) out[m] = sumWhere(ledger, e => e.month === m && pred(e));
+      out.ALL = sumWhere(ledger, pred);
+      return out;
+    };
+
+    const revM = byMonth(e => e.section === 'Revenue');
+    const dcM = {};
+    const gpM = {};
+    const opexBucketsM = {};
+    for (const b of OPEX_BUCKETS) opexBucketsM[b] = {};
+    const totOpexM = {};
+    const opProfitM = {};
+    const taxM = {};
+    const feeM = {};
+    const taxFeeM = {};
+    const netProfitM = {};
+    const unclassInM = byMonth(e => e.section === 'Needs Review' && e.amount > 0);
+    const unclassOutM = {};
+    const unclassNetM = {};
+    const nonPnlM = byMonth(e => NON_PNL_SECTIONS.has(e.section));
+    const cashChangeM = {};
+
+    for (const k of [...MONTHS, 'ALL']) {
+      const rawDc = sumWhere(ledger, e => (k === 'ALL' || e.month === k) && e.section === 'Direct costs');
+      dcM[k] = Math.round(-rawDc * 100) / 100;
+      gpM[k] = Math.round((revM[k] - dcM[k]) * 100) / 100;
+
+      let opSum = 0;
+      for (const b of OPEX_BUCKETS) {
+        const rawB = sumWhere(ledger, e => (k === 'ALL' || e.month === k) && e.section === 'Operating expenses' && e.summary_group === b);
+        opexBucketsM[b][k] = Math.round(-rawB * 100) / 100;
+        opSum += opexBucketsM[b][k];
+      }
+      totOpexM[k] = Math.round(opSum * 100) / 100;
+      opProfitM[k] = Math.round((gpM[k] - totOpexM[k]) * 100) / 100;
+
+      const rawTax = sumWhere(ledger, e => (k === 'ALL' || e.month === k) && e.section === 'Taxes');
+      const rawFee = sumWhere(ledger, e => (k === 'ALL' || e.month === k) && e.section === 'Bank fees');
+      taxM[k] = Math.round(-rawTax * 100) / 100;
+      feeM[k] = Math.round(-rawFee * 100) / 100;
+      taxFeeM[k] = Math.round((taxM[k] + feeM[k]) * 100) / 100;
+      netProfitM[k] = Math.round((opProfitM[k] - taxFeeM[k]) * 100) / 100;
+
+      const rawUnOut = sumWhere(ledger, e => (k === 'ALL' || e.month === k) && e.section === 'Needs Review' && e.amount < 0);
+      unclassOutM[k] = Math.round(-rawUnOut * 100) / 100;
+      unclassNetM[k] = Math.round((unclassInM[k] - unclassOutM[k]) * 100) / 100;
+      cashChangeM[k] = Math.round((netProfitM[k] + unclassNetM[k] + nonPnlM[k]) * 100) / 100;
+    }
+
+    const openUnclass = ledger.filter(e => e.section === 'Needs Review');
+    STATE = {
+      ledger,
+      periodFilter,
+      revM, dcM, gpM, opexBucketsM, totOpexM, opProfitM,
+      taxM, feeM, taxFeeM, netProfitM,
+      unclassInM, unclassOutM, unclassNetM, nonPnlM, cashChangeM,
+      openUnclassCount: openUnclass.length
+    };
+  }
+
+  // Initialize Header & Period dropdown
+  function initControls() {
+    const initials = PROFILE.business_name.split(/\s+/).slice(0, 2).map(w => w[0] || '').join('').toUpperCase() || 'SB';
+    document.getElementById('brand-initials').textContent = initials;
+    document.getElementById('biz-title').textContent = `${PROFILE.business_name} — Financial Overview`;
+    const spanText = MONTHS.length ? `${monthName(MONTHS[0], false)} – ${monthName(MONTHS[MONTHS.length - 1], true)}` : '';
+    document.getElementById('biz-meta').textContent = `${PROFILE.reporting_basis} • ${CUR} • ${spanText}`;
+
+    const sel = document.getElementById('period-select');
+    sel.innerHTML = `<option value="ALL">All Months (${spanText})</option>` +
+      MONTHS.map(m => `<option value="${m}">${monthName(m, true)}</option>`).join('');
+    sel.addEventListener('change', () => {
+      selectedPeriod = sel.value;
+      renderAll();
+    });
+
+    document.getElementById('toggle-monthly-cols').addEventListener('change', e => {
+      showMonthlyCols = e.target.checked;
+      renderShortPnl();
+    });
+
+    document.getElementById('btn-expand-all').addEventListener('click', () => {
+      const allKeys = ['rev', 'dc', ...OPEX_BUCKETS, 'taxfee', 'nonpnl'];
+      if (expandedGroups.size >= allKeys.length) {
+        expandedGroups.clear();
+        document.getElementById('btn-expand-all').textContent = 'Expand All';
+      } else {
+        allKeys.forEach(k => expandedGroups.add(k));
+        document.getElementById('btn-expand-all').textContent = 'Collapse All';
+      }
+      renderShortPnl();
+    });
+
+    // Tabs
+    document.querySelectorAll('.nav-tab').forEach(btn => {
+      btn.addEventListener('click', () => switchTab(btn.dataset.tab));
+    });
+
+    // Subtabs on Detailed view
+    document.getElementById('subtab-btn-pnl').addEventListener('click', () => {
+      document.getElementById('subpanel-pnl').style.display = 'block';
+      document.getElementById('subpanel-ledger').style.display = 'none';
+      document.getElementById('subtab-btn-pnl').classList.add('btn-primary');
+      document.getElementById('subtab-btn-ledger').classList.remove('btn-primary');
+    });
+    document.getElementById('subtab-btn-ledger').addEventListener('click', () => {
+      document.getElementById('subpanel-pnl').style.display = 'none';
+      document.getElementById('subpanel-ledger').style.display = 'block';
+      document.getElementById('subtab-btn-ledger').classList.add('btn-primary');
+      document.getElementById('subtab-btn-pnl').classList.remove('btn-primary');
+    });
+
+    // Ledger filters
+    const secSel = document.getElementById('ledger-sec-filter');
+    const sections = [...new Set(RAW.ledger.map(e => e.section))].sort();
+    secSel.innerHTML = `<option value="ALL">All Sections</option>` + sections.map(s => `<option value="${esc(s)}">${esc(s)}</option>`).join('');
+    const acctSel = document.getElementById('ledger-acct-filter');
+    acctSel.innerHTML = `<option value="ALL">All Accounts</option>` + RAW.accounts.map(a => `<option value="${esc(a)}">${esc(a)}</option>`).join('');
+    ['ledger-search', 'ledger-sec-filter', 'ledger-acct-filter'].forEach(id => {
+      document.getElementById(id).addEventListener('input', renderMasterLedger);
+      document.getElementById(id).addEventListener('change', renderMasterLedger);
+    });
+
+    // Classify controls
+    ['classify-mode-select', 'classify-filter-select'].forEach(id => {
+      document.getElementById(id).addEventListener('change', renderClassifyTab);
+    });
+    document.getElementById('btn-export-json').addEventListener('click', exportClassificationsJson);
+    document.getElementById('btn-export-json-2').addEventListener('click', exportClassificationsJson);
+    document.getElementById('btn-reset-tags').addEventListener('click', () => {
+      if (Object.keys(userOverrides).length === 0) return;
+      userOverrides = {};
+      saveOverrides();
+      recomputeState();
+      renderAll();
+    });
+    document.getElementById('import-json-input').addEventListener('change', importClassificationsJson);
+    document.getElementById('btn-export-csv').addEventListener('click', exportLedgerCsv);
+
+    // Drawer events
+    document.getElementById('drawer-close').addEventListener('click', closeDrawer);
+    document.getElementById('drawer-backdrop').addEventListener('click', closeDrawer);
+    document.getElementById('drawer-search').addEventListener('input', renderDrawerBody);
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeDrawer(); });
+  }
+
+  function switchTab(tabId) {
+    document.querySelectorAll('.nav-tab').forEach(b => b.classList.toggle('active', b.dataset.tab === tabId));
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.toggle('active', p.id === `tab-${tabId}`));
+  }
+
+  // Open Drill-down Drawer
+  function openDrawer(title, subtitle, predicate, monthKey = null) {
+    const effMonth = monthKey || selectedPeriod;
+    const rows = STATE.ledger.filter(e => (effMonth === 'ALL' || e.month === effMonth) && predicate(e));
+    currentDrawerState = { title, subtitle, predicate, effMonth, subcatFilter: 'ALL', rows };
+    document.getElementById('drawer-title').textContent = title;
+    document.getElementById('drawer-subtitle').textContent = `${subtitle} • ${monthName(effMonth, true)} • ${rows.length} component(s)`;
+    document.getElementById('drawer-search').value = '';
+    renderDrawerBody();
+    document.getElementById('drawer-backdrop').classList.add('open');
+    document.getElementById('txn-drawer').classList.add('open');
+  }
+
+  function closeDrawer() {
+    document.getElementById('drawer-backdrop').classList.remove('open');
+    document.getElementById('txn-drawer').classList.remove('open');
+  }
+
+  function renderDrawerBody() {
+    if (!currentDrawerState) return;
+    const { title, subtitle, predicate, effMonth } = currentDrawerState;
+    const allMatching = STATE.ledger.filter(e => (effMonth === 'ALL' || e.month === effMonth) && predicate(e));
+    const q = document.getElementById('drawer-search').value.trim().toLowerCase();
+
+    // Category chips
+    const catTotals = {};
+    allMatching.forEach(e => { catTotals[e.category] = (catTotals[e.category] || 0) + e.amount; });
+    const cats = Object.entries(catTotals).sort((a, b) => Math.abs(b[1]) - Math.abs(a[1]));
+    const chipsBox = document.getElementById('drawer-subchips');
+    if (cats.length > 1) {
+      chipsBox.innerHTML = `<span class="chip ${currentDrawerState.subcatFilter === 'ALL' ? 'active' : ''}" data-cat="ALL">All (${allMatching.length})</span>` +
+        cats.map(([c, amt]) => `<span class="chip ${currentDrawerState.subcatFilter === c ? 'active' : ''}" data-cat="${esc(c)}">${esc(c)}: ${fmt(amt)}</span>`).join('');
+      chipsBox.querySelectorAll('.chip').forEach(ch => {
+        ch.addEventListener('click', () => {
+          currentDrawerState.subcatFilter = ch.dataset.cat;
+          renderDrawerBody();
+        });
+      });
+    } else {
+      chipsBox.innerHTML = '';
+    }
+
+    const filtered = allMatching.filter(e => {
+      if (currentDrawerState.subcatFilter !== 'ALL' && e.category !== currentDrawerState.subcatFilter) return false;
+      if (!q) return true;
+      return `${e.id} ${e.date} ${e.account} ${e.description} ${e.category} ${e.counterparty_display}`.toLowerCase().includes(q);
+    });
+
+    const netSum = filtered.reduce((s, e) => s + e.amount, 0);
+    document.getElementById('drawer-total-pill').textContent = `Net Total: ${fmt(netSum, true)} (${filtered.length} rows)`;
+
+    if (!filtered.length) {
+      document.getElementById('drawer-table-wrap').innerHTML = `<p class="muted" style="padding:18px 4px;">No matching transactions for this selection.</p>`;
+      return;
+    }
+
+    const html = `
+      <table>
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Description &amp; Source</th>
+            <th>Category / Quick Tag</th>
+            <th class="right">Amount</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${filtered.map(e => {
+            const curVal = `${e.section}|${e.category}`;
+            const hasPreset = OWNER_PRESETS.some(p => p.value === curVal);
+            return `
+              <tr>
+                <td style="white-space:nowrap;font-size:12.5px;">
+                  <div><strong>${esc(e.date)}</strong></div>
+                  <div class="muted" style="font-size:11px;">${esc(e.id)}</div>
+                </td>
+                <td style="max-width:300px;">
+                  <div style="font-weight:500;word-break:break-word;">${esc(e.description)}</div>
+                  <div class="muted" style="font-size:11.5px;margin-top:2px;">${esc(e.account)} • Statement ${esc(e.statement)} (p.${esc(e.pages)})</div>
+                </td>
+                <td>
+                  <select class="drawer-tag-select" data-id="${esc(e.id)}" style="max-width:210px;font-size:12px;padding:4px 7px;">
+                    ${!hasPreset && e.section !== 'Needs Review' ? `<option value="${esc(curVal)}" selected>${esc(e.section)}: ${esc(e.category)}</option>` : ''}
+                    ${OWNER_PRESETS.map(p => `<option value="${esc(p.value)}" ${(p.value === curVal || (p.value === '' && e.section === 'Needs Review')) ? 'selected' : ''}>${esc(p.label)}</option>`).join('')}
+                  </select>
+                </td>
+                <td class="right num ${e.amount >= 0 ? 'pos' : 'neg'}" style="font-weight:700;white-space:nowrap;">
+                  ${fmt(e.amount, true)}
+                </td>
+              </tr>`;
+          }).join('')}
+        </tbody>
+      </table>`;
+    const box = document.getElementById('drawer-table-wrap');
+    box.innerHTML = html;
+    box.querySelectorAll('.drawer-tag-select').forEach(sel => {
+      sel.addEventListener('change', () => {
+        applySingleTag(sel.dataset.id, sel.value);
+        renderAll();
+        renderDrawerBody();
+      });
+    });
+  }
+
+  function applySingleTag(ledgerId, val) {
+    if (!val) {
+      delete userOverrides[ledgerId];
+    } else {
+      const [section, category] = val.split('|');
+      userOverrides[ledgerId] = { section, category, note: 'Tagged in interactive dashboard' };
+    }
+    saveOverrides();
+    recomputeState();
+  }
+
+  function renderHeaderBadges() {
+    const uCount = STATE.openUnclassCount;
+    const statusBadge = document.getElementById('status-badge');
+    if (uCount > 0) {
+      statusBadge.className = 'badge badge-amber';
+      statusBadge.textContent = `Provisional (${uCount} unclassified)`;
+    } else {
+      statusBadge.className = 'badge badge-emerald';
+      statusBadge.textContent = 'Fully Classified';
+    }
+    document.getElementById('unclass-tab-count').textContent = uCount;
+
+    const ovCount = Object.keys(userOverrides).length;
+    const ovBadge = document.getElementById('override-badge');
+    if (ovCount > 0) {
+      ovBadge.style.display = 'inline-flex';
+      ovBadge.textContent = `${ovCount} owner tag(s) active`;
+    } else {
+      ovBadge.style.display = 'none';
+    }
+
+    // Banner on Overview
+    const banner = document.getElementById('unclassified-banner');
+    const pk = selectedPeriod;
+    const uIn = STATE.unclassInM[pk];
+    const uOut = STATE.unclassOutM[pk];
+    if (uIn > 0 || uOut > 0) {
+      banner.style.display = 'flex';
+      banner.innerHTML = `
+        <div style="max-width:920px;">
+          <strong>Why Profit &amp; Bank Cash Differ Right Now:</strong>
+          <strong>${fmt(uIn)}</strong> in bank receipts and <strong>${fmt(uOut)}</strong> in bank payments are currently excluded from your Profit &amp; Loss because their bank descriptions don't confirm whether they are sales, expenses, transfers, or loans.
+        </div>
+        <button class="btn btn-amber btn-sm no-print" id="banner-classify-btn">Label Unknown Transactions →</button>
+      `;
+      document.getElementById('banner-classify-btn').onclick = () => switchTab('classify');
+    } else {
+      banner.style.display = 'none';
+    }
+  }
+
+  function renderKpis() {
+    const pk = selectedPeriod;
+    const rev = STATE.revM[pk];
+    const totalCost = Math.round((STATE.dcM[pk] + STATE.totOpexM[pk] + STATE.taxFeeM[pk]) * 100) / 100;
+    const net = STATE.netProfitM[pk];
+    const cashClose = pk === 'ALL' ? RAW.cash_flow.closing.total : RAW.cash_flow.closing[pk];
+    const cashOpen = pk === 'ALL' ? RAW.cash_flow.opening.total : RAW.cash_flow.opening[pk];
+    const cashDelta = STATE.cashChangeM[pk];
+
+    const cards = [
+      {
+        label: 'Money Made (Revenue)',
+        val: fmt(rev),
+        cls: rev > 0 ? 'pos' : '',
+        sub: STATE.unclassInM[pk] > 0 ? `+ ${fmt(STATE.unclassInM[pk])} unclassified receipts pending` : 'Confirmed operating revenue',
+        drill: () => openDrawer('Confirmed Revenue', 'All classified revenue & refund items', e => e.section === 'Revenue')
+      },
+      {
+        label: 'Total Classified Costs',
+        val: fmt(totalCost),
+        cls: 'neg',
+        sub: `${DIRECT_LABEL}: ${fmt(STATE.dcM[pk])} • Overhead & Fees: ${fmt(STATE.totOpexM[pk] + STATE.taxFeeM[pk])}`,
+        drill: () => openDrawer('All Classified Costs', 'Direct costs, operating expenses, taxes & bank fees', e => PNL_SECTIONS.has(e.section) && e.section !== 'Revenue')
+      },
+      {
+        label: STATE.openUnclassCount > 0 ? 'Provisional Profit / (Loss)' : 'Net Profit / (Loss)',
+        val: fmt(net, true),
+        cls: net >= 0 ? 'pos' : 'neg',
+        sub: `Gross Margin Result: ${fmt(STATE.gpM[pk], true)}`,
+        drill: () => openDrawer('Profit & Loss Components', 'All transactions included in P&L calculation', e => PNL_SECTIONS.has(e.section))
+      },
+      {
+        label: 'Closing Bank Cash',
+        val: fmt(cashClose),
+        cls: '',
+        sub: `Started at ${fmt(cashOpen)} (${fmt(cashDelta, true)} net cash move)`,
+        drill: () => openDrawer('All External Bank Cash Movements', 'Every external bank inflow and outflow', e => e.section !== 'Internal transfers')
+      }
+    ];
+
+    const grid = document.getElementById('kpi-grid');
+    grid.innerHTML = cards.map((c, idx) => `
+      <div class="kpi-card" data-idx="${idx}" title="Click or double-click to see underlying transactions">
+        <div class="kpi-label"><span>${esc(c.label)}</span><span class="kpi-hint">Inspect ↗</span></div>
+        <div class="kpi-value num ${c.cls}">${esc(c.val)}</div>
+        <div class="kpi-sub">${esc(c.sub)}</div>
+      </div>
+    `).join('');
+
+    grid.querySelectorAll('.kpi-card').forEach(el => {
+      const fn = cards[Number(el.dataset.idx)].drill;
+      el.addEventListener('click', fn);
+    });
+  }
+
+  // Interactive SVG Chart: Monthly Revenue vs Costs vs Net Profit
+  function renderMonthlyChart() {
+    const box = document.getElementById('monthly-chart-box');
+    const W = 680, H = 260, padL = 62, padR = 18, padT = 18, padB = 42;
+    const plotW = W - padL - padR, plotH = H - padT - padB;
+
+    const series = MONTHS.map(m => ({
+      m,
+      rev: STATE.revM[m],
+      cost: Math.round((STATE.dcM[m] + STATE.totOpexM[m] + STATE.taxFeeM[m]) * 100) / 100,
+      net: STATE.netProfitM[m]
+    }));
+
+    const maxPos = Math.max(1000, ...series.map(s => Math.max(s.rev, s.cost, s.net)));
+    const minNeg = Math.min(0, ...series.map(s => s.net));
+    const span = (maxPos - minNeg) || 1;
+    const yOf = val => padT + ((maxPos - val) / span) * plotH;
+    const zeroY = yOf(0);
+
+    const groupW = plotW / Math.max(series.length, 1);
+    const barW = Math.min(22, groupW * 0.30);
+
+    // Y gridlines (4 ticks)
+    let gridSvg = '';
+    for (let i = 0; i <= 4; i++) {
+      const v = minNeg + (span * i) / 4;
+      const y = yOf(v);
+      gridSvg += `<line x1="${padL}" y1="${y}" x2="${W - padR}" y2="${y}" stroke="#e2e8f0" stroke-dasharray="${Math.abs(v) < 1 ? '' : '3,3'}"/>`;
+      gridSvg += `<text x="${padL - 8}" y="${y + 4}" text-anchor="end" font-size="11" fill="#64748b">${esc(fmtCompact(v))}</text>`;
+    }
+    gridSvg += `<line x1="${padL}" y1="${zeroY}" x2="${W - padR}" y2="${zeroY}" stroke="#94a3b8" stroke-width="1.2"/>`;
+
+    let barsSvg = '';
+    let linePts = [];
+    series.forEach((s, i) => {
+      const cx = padL + groupW * (i + 0.5);
+      const isSelected = selectedPeriod === 'ALL' || selectedPeriod === s.m;
+      const op = isSelected ? '1' : '0.32';
+
+      const rTop = yOf(Math.max(s.rev, 0));
+      const rH = Math.max(Math.abs(zeroY - rTop), s.rev > 0 ? 2 : 0);
+      const cTop = yOf(Math.max(s.cost, 0));
+      const cH = Math.max(Math.abs(zeroY - cTop), s.cost > 0 ? 2 : 0);
+
+      barsSvg += `
+        <g class="month-bar-group" data-month="${s.m}" style="cursor:pointer;opacity:${op};">
+          <rect x="${cx - barW - 2}" y="${Math.min(rTop, zeroY)}" width="${barW}" height="${rH}" rx="3" fill="#059669"/>
+          <rect x="${cx + 2}" y="${Math.min(cTop, zeroY)}" width="${barW}" height="${cH}" rx="3" fill="#dc2626"/>
+          <rect x="${cx - groupW * 0.45}" y="${padT}" width="${groupW * 0.9}" height="${plotH + 24}" fill="transparent"/>
+          <text x="${cx}" y="${H - 14}" text-anchor="middle" font-size="11.5" font-weight="${selectedPeriod === s.m ? '700' : '500'}" fill="#334155">${esc(monthName(s.m, true).replace(' 20', " '"))}</text>
+        </g>`;
+      linePts.push(`${cx},${yOf(s.net)}`);
+    });
+
+    const lineSvg = linePts.length > 1
+      ? `<polyline fill="none" stroke="#1e40af" stroke-width="2.2" points="${linePts.join(' ')}"/>` +
+        series.map((s, i) => {
+          const cx = padL + groupW * (i + 0.5);
+          return `<circle cx="${cx}" cy="${yOf(s.net)}" r="3.8" fill="#ffffff" stroke="#1e40af" stroke-width="2"/>`;
+        }).join('')
+      : '';
+
+    box.innerHTML = `<svg viewBox="0 0 ${W} ${H}" width="100%" height="260" role="img" aria-label="Monthly revenue and costs chart">${gridSvg}${barsSvg}${lineSvg}</svg>`;
+
+    const tip = document.getElementById('svg-tooltip');
+    box.querySelectorAll('.month-bar-group').forEach(g => {
+      const m = g.dataset.month;
+      const item = series.find(x => x.m === m);
+      g.addEventListener('mousemove', ev => {
+        tip.style.display = 'block';
+        tip.style.left = `${ev.clientX + 14}px`;
+        tip.style.top = `${ev.clientY - 14}px`;
+        tip.innerHTML = `
+          <div style="font-weight:700;margin-bottom:4px;">${esc(monthName(m, true))}</div>
+          <div>Revenue: <strong>${esc(fmt(item.rev))}</strong></div>
+          <div>Classified Costs: <strong>${esc(fmt(item.cost))}</strong></div>
+          <div>Net Result: <strong>${esc(fmt(item.net, true))}</strong></div>
+          <div style="color:#93c5fd;margin-top:4px;font-size:11px;">Click to inspect ${esc(monthName(m, false))} transactions</div>
+        `;
+      });
+      g.addEventListener('mouseleave', () => { tip.style.display = 'none'; });
+      g.addEventListener('click', () => {
+        openDrawer(`${monthName(m, true)} — P&L Transactions`, 'All classified revenue & cost items in month', e => PNL_SECTIONS.has(e.section), m);
+      });
+    });
+  }
+
+  // Cost Breakdown Horizontal Bars
+  function renderCostBars() {
+    const pk = selectedPeriod;
+    const clusters = [
+      { name: DIRECT_LABEL, amt: STATE.dcM[pk], color: '#0284c7', pred: e => e.section === 'Direct costs' },
+      ...OPEX_BUCKETS.map(b => ({
+        name: b,
+        amt: STATE.opexBucketsM[b][pk],
+        color: '#dc2626',
+        pred: e => e.section === 'Operating expenses' && e.summary_group === b
+      })),
+      { name: 'Taxes & Bank Fees', amt: STATE.taxFeeM[pk], color: '#64748b', pred: e => e.section === 'Taxes' || e.section === 'Bank fees' }
+    ].filter(c => c.amt > 0).sort((a, b) => b.amt - a.amt);
+
+    const total = clusters.reduce((s, c) => s + c.amt, 0);
+    const box = document.getElementById('cost-bars-box');
+    if (!clusters.length) {
+      box.innerHTML = `<p class="muted">No classified costs in this period.</p>`;
+      return;
+    }
+
+    box.innerHTML = `<div class="cost-bar-list">${clusters.map((c, i) => {
+      const pct = total > 0 ? ((c.amt / total) * 100).toFixed(1) : '0.0';
+      return `
+        <div class="cost-bar-item" data-idx="${i}" title="Click to inspect ${esc(c.name)} transactions">
+          <div class="cost-bar-top">
+            <span>${esc(c.name)}</span>
+            <span class="num">${esc(fmt(c.amt))} <span class="muted" style="font-weight:500;">(${pct}%)</span></span>
+          </div>
+          <div class="cost-bar-track">
+            <div class="cost-bar-fill" style="width:${Math.max(Number(pct), 1.5)}%;background:${c.color};"></div>
+          </div>
+        </div>`;
+    }).join('')}</div>`;
+
+    box.querySelectorAll('.cost-bar-item').forEach(el => {
+      const item = clusters[Number(el.dataset.idx)];
+      el.addEventListener('click', () => openDrawer(item.name, 'Cost cluster breakdown', item.pred));
+    });
+  }
+
+  // Short P&L + Expandable Subcategories + Double-Click Drill-Down
+  function renderShortPnl() {
+    const pk = selectedPeriod;
+    const cols = showMonthlyCols ? MONTHS : [];
+
+    function subcatsFor(pred, negate = true) {
+      const map = {};
+      STATE.ledger.filter(pred).forEach(e => {
+        if (!map[e.category]) {
+          map[e.category] = { ALL: 0 };
+          MONTHS.forEach(m => { map[e.category][m] = 0; });
+        }
+        const v = negate ? -e.amount : e.amount;
+        map[e.category][e.month] = Math.round((map[e.category][e.month] + v) * 100) / 100;
+        map[e.category].ALL = Math.round((map[e.category].ALL + v) * 100) / 100;
+      });
+      return Object.entries(map).sort((a, b) => Math.abs(b[1][pk]) - Math.abs(a[1][pk]));
+    }
+
+    const drillRegistry = [];
+    const reg = (title, sub, pred) => {
+      const id = drillRegistry.length;
+      drillRegistry.push({ title, sub, pred });
+      return id;
+    };
+
+    function renderGroupRow(key, label, valuesMap, pred, negateDisplay = false, rowClass = 'drill-row') {
+      const isExp = expandedGroups.has(key);
+      const did = reg(label, 'Summary P&L component', pred);
+      const signMul = negateDisplay ? -1 : 1;
+      const mainVal = valuesMap[pk] * signMul;
+
+      let html = `<tr class="${rowClass}" data-did="${did}">
+        <td>
+          <button class="expand-btn no-print" data-exp="${esc(key)}" title="Expand or collapse subcategories">${isExp ? '−' : '+'}</button>
+          <strong>${esc(label)}</strong>
+          <span class="inspect-pill no-print">Double-click to inspect</span>
+        </td>
+        ${cols.map(m => `<td class="right num cell-clickable" data-month="${m}">${fmt(valuesMap[m] * signMul)}</td>`).join('')}
+        <td class="right num cell-clickable" data-month="${pk}"><strong>${fmt(mainVal)}</strong></td>
+      </tr>`;
+
+      if (isExp) {
+        const subs = subcatsFor(pred, negateDisplay);
+        subs.forEach(([catName, catVals]) => {
+          const sdid = reg(`${label} — ${catName}`, 'Category transactions', e => pred(e) && e.category === catName);
+          const sMul = negateDisplay ? -1 : 1;
+          html += `<tr class="drill-row row-subcat" data-did="${sdid}">
+            <td>↳ ${esc(catName)} <span class="inspect-pill no-print">Inspect</span></td>
+            ${cols.map(m => `<td class="right num cell-clickable" data-month="${m}">${fmt(catVals[m] * sMul)}</td>`).join('')}
+            <td class="right num cell-clickable" data-month="${pk}">${fmt(catVals[pk] * sMul)}</td>
+          </tr>`;
+        });
+      }
+      return html;
+    }
+
+    function renderTotalRow(label, valuesMap, pred, cls = 'row-subtotal') {
+      const did = reg(label, 'Subtotal breakdown', pred);
+      return `<tr class="drill-row ${cls}" data-did="${did}">
+        <td>${esc(label)} <span class="inspect-pill no-print">Inspect</span></td>
+        ${cols.map(m => `<td class="right num cell-clickable" data-month="${m}">${fmt(valuesMap[m], true)}</td>`).join('')}
+        <td class="right num cell-clickable ${valuesMap[pk] >= 0 ? 'pos' : 'neg'}" data-month="${pk}">${fmt(valuesMap[pk], true)}</td>
+      </tr>`;
+    }
+
+    let rowsHtml = '';
+    rowsHtml += renderGroupRow('rev', 'Revenue (Net of Refunds)', STATE.revM, e => e.section === 'Revenue', false);
+    rowsHtml += renderGroupRow('dc', DIRECT_LABEL, STATE.dcM, e => e.section === 'Direct costs', true);
+    rowsHtml += renderTotalRow('Gross Profit / (Loss)', STATE.gpM, e => e.section === 'Revenue' || e.section === 'Direct costs');
+
+    OPEX_BUCKETS.forEach(b => {
+      if (Math.abs(STATE.opexBucketsM[b].ALL) >= 0.01 || expandedGroups.has(b)) {
+        rowsHtml += renderGroupRow(b, `Operating Expenses — ${b}`, STATE.opexBucketsM[b], e => e.section === 'Operating expenses' && e.summary_group === b, true);
+      }
+    });
+    rowsHtml += renderTotalRow('Operating Profit / (Loss)', STATE.opProfitM, e => ['Revenue', 'Direct costs', 'Operating expenses'].includes(e.section));
+
+    rowsHtml += renderGroupRow('taxfee', 'Taxes, Levies & Bank Charges', STATE.taxFeeM, e => e.section === 'Taxes' || e.section === 'Bank fees', true);
+    const netLabel = STATE.openUnclassCount > 0 ? 'Provisional Net Profit / (Loss)' : 'Net Profit / (Loss)';
+    rowsHtml += renderTotalRow(netLabel, STATE.netProfitM, e => PNL_SECTIONS.has(e.section), 'row-highlight');
+
+    // Cash Reconciliation Bridge
+    const didUnIn = reg('Unclassified Receipts (Excluded from P&L)', 'Awaiting owner label', e => e.section === 'Needs Review' && e.amount > 0);
+    const didUnOut = reg('Unclassified Payments (Excluded from P&L)', 'Awaiting owner label', e => e.section === 'Needs Review' && e.amount < 0);
+    rowsHtml += `
+      <tr class="drill-row row-bridge" data-did="${didUnIn}">
+        <td>+ Bridge: Unclassified Bank Receipts (Pending Label) <span class="inspect-pill no-print">Inspect</span></td>
+        ${cols.map(m => `<td class="right num cell-clickable" data-month="${m}">${fmt(STATE.unclassInM[m], true)}</td>`).join('')}
+        <td class="right num cell-clickable" data-month="${pk}">${fmt(STATE.unclassInM[pk], true)}</td>
+      </tr>
+      <tr class="drill-row row-bridge" data-did="${didUnOut}">
+        <td>− Bridge: Unclassified Bank Payments (Pending Label) <span class="inspect-pill no-print">Inspect</span></td>
+        ${cols.map(m => `<td class="right num cell-clickable" data-month="${m}">${fmt(-STATE.unclassOutM[m], true)}</td>`).join('')}
+        <td class="right num cell-clickable" data-month="${pk}">${fmt(-STATE.unclassOutM[pk], true)}</td>
+      </tr>`;
+    rowsHtml += renderGroupRow('nonpnl', '± Bridge: Non-P&L Cash (Loans, Assets, Owner & Other Accounts)', STATE.nonPnlM, e => NON_PNL_SECTIONS.has(e.section), false, 'drill-row row-bridge');
+    rowsHtml += renderTotalRow('Actual Net Bank Cash Change', STATE.cashChangeM, e => e.section !== 'Internal transfers');
+
+    const wrap = document.getElementById('short-pnl-wrap');
+    wrap.innerHTML = `
+      <table>
+        <thead>
+          <tr>
+            <th>Summary Line Item</th>
+            ${cols.map(m => `<th class="right">${esc(monthName(m, true))}</th>`).join('')}
+            <th class="right">${esc(pk === 'ALL' ? 'Cumulative Total' : monthName(pk, true))}</th>
+          </tr>
+        </thead>
+        <tbody>${rowsHtml}</tbody>
+      </table>`;
+
+    wrap.querySelectorAll('.expand-btn').forEach(btn => {
+      btn.addEventListener('click', ev => {
+        ev.stopPropagation();
+        const k = btn.dataset.exp;
+        if (expandedGroups.has(k)) expandedGroups.delete(k); else expandedGroups.add(k);
+        renderShortPnl();
+      });
+    });
+
+    wrap.querySelectorAll('tr.drill-row').forEach(tr => {
+      const info = drillRegistry[Number(tr.dataset.did)];
+      tr.addEventListener('dblclick', () => openDrawer(info.title, info.sub, info.pred));
+      tr.querySelectorAll('.inspect-pill').forEach(p => {
+        p.addEventListener('click', ev => {
+          ev.stopPropagation();
+          openDrawer(info.title, info.sub, info.pred);
+        });
+      });
+      tr.querySelectorAll('td.cell-clickable').forEach(td => {
+        td.addEventListener('click', ev => {
+          ev.stopPropagation();
+          openDrawer(info.title, info.sub, info.pred, td.dataset.month);
+        });
+      });
+    });
+  }
+
+  // TAB 2: Factual Financial Health & Cost Report
+  function renderHealthReport() {
+    const totCost = Math.round((STATE.dcM.ALL + STATE.totOpexM.ALL + STATE.taxFeeM.ALL) * 100) / 100;
+    const dcPct = totCost > 0 ? ((STATE.dcM.ALL / totCost) * 100).toFixed(1) : '0.0';
+    const opPct = totCost > 0 ? ((STATE.totOpexM.ALL / totCost) * 100).toFixed(1) : '0.0';
+    const tfPct = totCost > 0 ? ((STATE.taxFeeM.ALL / totCost) * 100).toFixed(1) : '0.0';
+
+    const extIn = STATE.ledger.filter(e => e.section !== 'Internal transfers' && e.amount > 0).reduce((s, e) => s + e.amount, 0);
+    const extOut = STATE.ledger.filter(e => e.section !== 'Internal transfers' && e.amount < 0).reduce((s, e) => s - e.amount, 0);
+    const inClassPct = extIn > 0 ? (((extIn - STATE.unclassInM.ALL) / extIn) * 100).toFixed(1) : '100.0';
+    const outClassPct = extOut > 0 ? (((extOut - STATE.unclassOutM.ALL) / extOut) * 100).toFixed(1) : '100.0';
+
+    // Top individual cost categories (recomputed dynamically from current classifications)
+    const catMap = {};
+    STATE.ledger.filter(e => PNL_SECTIONS.has(e.section) && e.section !== 'Revenue').forEach(e => {
+      const k = `${e.section}|${e.category}`;
+      if (!catMap[k]) catMap[k] = { category: e.category, section: e.section, group: e.summary_group, amt: 0, count: 0 };
+      catMap[k].amt = Math.round((catMap[k].amt - e.amount) * 100) / 100;
+      catMap[k].count += 1;
+    });
+    const topCats = Object.values(catMap).filter(c => c.amt > 0).sort((a, b) => b.amt - a.amt).slice(0, 10);
+
+    const h = RAW.health;
+    const openAcctMap = {};
+    (h.opening_account_balances || []).forEach(r => { openAcctMap[r.account] = r.opening; });
+
+    const container = document.getElementById('health-report-container');
+    container.innerHTML = `
+      <div class="health-grid-2">
+        <div class="card" style="margin-bottom:0;">
+          <div class="card-header"><div class="card-title">1. Cash Position &amp; Liquidity Snapshot</div></div>
+          <div class="card-body">
+            <div class="metric-list">
+              <div class="metric-row"><span>Opening Combined Bank Balance</span><strong class="num">${fmt(h.opening_cash)}</strong></div>
+              <div class="metric-row"><span>Latest Supplied Bank Balance${h.mixed_cutoff ? ' (mixed cutoff dates)' : ''}</span><strong class="num">${fmt(h.closing_cash)}</strong></div>
+              <div class="metric-row"><span>Actual Net Cash Change</span><strong class="num ${h.net_cash_change >= 0 ? 'pos' : 'neg'}">${fmt(h.net_cash_change, true)}</strong></div>
+              <div class="metric-row"><span>Total External Cash Inflows</span><strong class="num">${fmt(extIn)}</strong></div>
+              <div class="metric-row"><span>Total External Cash Outflows</span><strong class="num">${fmt(extOut)}</strong></div>
+              <div class="metric-row"><span>External Inflow-to-Outflow Ratio</span><strong class="num">${extOut > 0 ? (extIn / extOut).toFixed(2) : '0.00'}x</strong></div>
+              <div class="metric-row"><span>Highest Full-Month Closing Cash</span><strong class="num">${fmt(h.peak_cash_month.balance)} (${esc(monthName(h.peak_cash_month.month, false))})</strong></div>
+              <div class="metric-row"><span>Lowest Full-Month Closing Cash</span><strong class="num">${fmt(h.low_cash_month.balance)} (${esc(monthName(h.low_cash_month.month, false))})</strong></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card" style="margin-bottom:0;">
+          <div class="card-header"><div class="card-title">2. Banking Friction &amp; Data Completeness</div></div>
+          <div class="card-body">
+            <div class="metric-list">
+              <div class="metric-row"><span>Embedded Payment / Transfer Fees</span><strong class="num">${fmt(h.embedded_fee_total)} (${h.embedded_fee_count} txns)</strong></div>
+              <div class="metric-row"><span>Direct Bank Maintenance &amp; SMS Charges</span><strong class="num">${fmt(h.bank_charge_total)} (${h.bank_charge_count} entries)</strong></div>
+              <div class="metric-row"><span>Statutory Taxes &amp; Levies Paid</span><strong class="num">${fmt(STATE.taxM.ALL)}</strong></div>
+              <div class="metric-row"><span>Matched Internal Transfers Excluded</span><strong class="num">${RAW.transfers.length} pair(s) (${fmt(RAW.transfers.reduce((s, t) => s + t.amount, 0))})</strong></div>
+            </div>
+            <div class="progress-pair" style="margin-top:16px;">
+              <div class="progress-label"><span>External Inflows Classified</span><span class="num">${inClassPct}% (${fmt(extIn - STATE.unclassInM.ALL)} of ${fmt(extIn)})</span></div>
+              <div class="cost-bar-track"><div class="cost-bar-fill" style="width:${inClassPct}%;background:#059669;"></div></div>
+            </div>
+            <div class="progress-pair">
+              <div class="progress-label"><span>External Outflows Classified</span><span class="num">${outClassPct}% (${fmt(extOut - STATE.unclassOutM.ALL)} of ${fmt(extOut)})</span></div>
+              <div class="cost-bar-track"><div class="cost-bar-fill" style="width:${outClassPct}%;background:#1e40af;"></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <div>
+            <div class="card-title">3. Where Costs Are — Classified Cost Structure (${fmt(totCost)} Total)</div>
+            <div class="card-subtitle">${esc(DIRECT_LABEL)}: ${dcPct}% • Operating Overhead: ${opPct}% • Taxes &amp; Bank Fees: ${tfPct}% — Click any category row to inspect payments</div>
+          </div>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Cost Category</th>
+                <th>Summary Bucket</th>
+                <th class="right">Transactions</th>
+                <th class="right">Cumulative Spend</th>
+                <th class="right">% of Total Costs</th>
+              </tr>
+            </thead>
+            <tbody id="health-top-cats-body">
+              ${topCats.map((c, i) => {
+                const pct = totCost > 0 ? ((c.amt / totCost) * 100).toFixed(1) : '0.0';
+                return `<tr class="drill-row" data-sec="${esc(c.section)}" data-cat="${esc(c.category)}">
+                  <td>${i + 1}</td>
+                  <td><strong>${esc(c.category)}</strong> <span class="inspect-pill no-print">Inspect</span></td>
+                  <td>${esc(c.group)}</td>
+                  <td class="right num">${c.count}</td>
+                  <td class="right num">${fmt(c.amt)}</td>
+                  <td class="right num"><strong>${pct}%</strong></td>
+                </tr>`;
+              }).join('')}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <div>
+            <div class="card-title">4. Monthly Revenue, Cost &amp; Cash Balance Rhythm</div>
+            <div class="card-subtitle">Month-by-month factual progression across supplied bank statements</div>
+          </div>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Month</th>
+                <th class="right">Confirmed Revenue</th>
+                <th class="right">${esc(DIRECT_LABEL)}</th>
+                <th class="right">Operating Expenses</th>
+                <th class="right">Taxes &amp; Fees</th>
+                <th class="right">Unclassified Net</th>
+                <th class="right">Closing Bank Cash</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${MONTHS.map(m => `
+                <tr>
+                  <td><strong>${esc(monthName(m, true))}</strong></td>
+                  <td class="right num">${fmt(STATE.revM[m])}</td>
+                  <td class="right num">${fmt(STATE.dcM[m])}</td>
+                  <td class="right num">${fmt(STATE.totOpexM[m])}</td>
+                  <td class="right num">${fmt(STATE.taxFeeM[m])}</td>
+                  <td class="right num">${fmt(STATE.unclassNetM[m], true)}</td>
+                  <td class="right num"><strong>${fmt(RAW.cash_flow.closing[m])}</strong></td>
+                </tr>`).join('')}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header"><div class="card-title">5. Supplied Bank Account Coverage</div></div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Bank Account</th>
+                <th class="right">Opening Balance</th>
+                <th class="right">Latest Supplied Balance</th>
+                <th>Latest Statement Cutoff &amp; Coverage Note</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${(h.latest_account_balances || []).map(r => `
+                <tr>
+                  <td><strong>${esc(r.account)}</strong></td>
+                  <td class="right num">${fmt(openAcctMap[r.account] || 0)}</td>
+                  <td class="right num"><strong>${fmt(r.source_closing)}</strong></td>
+                  <td>${esc(r.end)} — ${esc(r.coverage)}</td>
+                </tr>`).join('')}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    `;
+
+    container.querySelectorAll('#health-top-cats-body tr.drill-row').forEach(tr => {
+      tr.addEventListener('click', () => {
+        const sec = tr.dataset.sec, cat = tr.dataset.cat;
+        openDrawer(`${cat} (${sec})`, 'Top cost category transactions', e => e.section === sec && e.category === cat, 'ALL');
+      });
+    });
+  }
+
+  // TAB 3: Interactive Classify Unknowns Workspace
+  function renderClassifyTab() {
+    const baselineNet = RAW.summary_pnl.net_profit.total;
+    const currentNet = STATE.netProfitM.ALL;
+    const deltaNet = Math.round((currentNet - baselineNet) * 100) / 100;
+
+    document.getElementById('live-impact-strip').innerHTML = `
+      <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;">
+        <div>
+          <div style="font-size:12px;font-weight:700;text-transform:uppercase;color:var(--primary);">Live Classification Preview</div>
+          <div style="font-size:13.5px;color:var(--ink-secondary);margin-top:2px;">
+            Tagging items below updates your Revenue, Costs, and Profit across all tabs immediately. Actual bank cash (<strong>${fmt(STATE.cashChangeM.ALL, true)}</strong>) never changes.
+          </div>
+        </div>
+        <div style="display:flex;gap:22px;flex-wrap:wrap;">
+          <div><div class="muted" style="font-size:11.5px;">Confirmed Revenue</div><div class="num pos" style="font-size:17px;font-weight:700;">${fmt(STATE.revM.ALL)}</div></div>
+          <div><div class="muted" style="font-size:11.5px;">Classified Costs</div><div class="num neg" style="font-size:17px;font-weight:700;">${fmt(STATE.dcM.ALL + STATE.totOpexM.ALL + STATE.taxFeeM.ALL)}</div></div>
+          <div><div class="muted" style="font-size:11.5px;">Updated Profit / (Loss)</div><div class="num ${currentNet >= 0 ? 'pos' : 'neg'}" style="font-size:17px;font-weight:700;">${fmt(currentNet, true)} ${deltaNet !== 0 ? `<span style="font-size:12px;">(${fmt(deltaNet, true)} vs initial)</span>` : ''}</div></div>
+          <div><div class="muted" style="font-size:11.5px;">Still Unclassified</div><div class="num" style="font-size:17px;font-weight:700;color:var(--amber);">${STATE.openUnclassCount} txns</div></div>
+        </div>
+      </div>`;
+
+    const mode = document.getElementById('classify-mode-select').value;
+    const filterMode = document.getElementById('classify-filter-select').value;
+    const wrap = document.getElementById('classify-table-wrap');
+
+    const byId = Object.fromEntries(STATE.ledger.map(e => [e.id, e]));
+
+    if (mode === 'groups') {
+      const groups = RAW.smart_review_groups.filter(g => {
+        if (filterMode === 'all') return true;
+        return g.txn_ids.some(id => byId[id] && byId[id].section === 'Needs Review');
+      });
+
+      if (!groups.length) {
+        wrap.innerHTML = `<p style="padding:24px;" class="pos"><strong>All unknown counterparty groups have been labeled!</strong> Export <code>classifications.json</code> above to save them into your books pipeline.</p>`;
+        return;
+      }
+
+      wrap.innerHTML = `
+        <table>
+          <thead>
+            <tr>
+              <th>Counterparty / Recurring Group</th>
+              <th>Direction &amp; Count</th>
+              <th class="right">Combined Amount</th>
+              <th>Assign Business Classification (Applies to Group)</th>
+              <th>Inspect</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${groups.map((g, gi) => {
+              const firstE = byId[g.txn_ids[0]];
+              const allSame = g.txn_ids.every(id => byId[id].section === firstE.section && byId[id].category === firstE.category);
+              const curVal = (allSame && firstE.section !== 'Needs Review') ? `${firstE.section}|${firstE.category}` : '';
+              return `
+                <tr>
+                  <td style="max-width:340px;">
+                    <div style="font-weight:700;">${esc(g.display_name)}</div>
+                    <div class="muted" style="font-size:12px;margin-top:2px;">Sample: ${esc(g.sample_description.slice(0, 95))}</div>
+                  </td>
+                  <td style="white-space:nowrap;">
+                    <span class="badge ${g.total_amount >= 0 ? 'badge-emerald' : 'badge-slate'}">${g.txn_ids.length} txn(s)</span>
+                    <div class="muted" style="font-size:11.5px;margin-top:3px;">${esc(g.dates[0])}${g.dates.length > 1 ? ` → ${esc(g.dates[g.dates.length - 1])}` : ''}</div>
+                  </td>
+                  <td class="right num ${g.total_amount >= 0 ? 'pos' : 'neg'}" style="font-weight:700;white-space:nowrap;">${fmt(g.total_amount, true)}</td>
+                  <td>
+                    <select class="group-tag-select" data-gidx="${gi}" style="width:100%;max-width:340px;">
+                      ${OWNER_PRESETS.map(p => `<option value="${esc(p.value)}" ${p.value === curVal ? 'selected' : ''}>${esc(p.label)}</option>`).join('')}
+                    </select>
+                  </td>
+                  <td><button class="btn btn-sm group-inspect-btn" data-gidx="${gi}">View ${g.txn_ids.length}</button></td>
+                </tr>`;
+            }).join('')}
+          </tbody>
+        </table>`;
+
+      wrap.querySelectorAll('.group-tag-select').forEach(sel => {
+        const g = groups[Number(sel.dataset.gidx)];
+        sel.addEventListener('change', () => {
+          g.txn_ids.forEach(id => {
+            if (!sel.value) delete userOverrides[id];
+            else {
+              const [section, category] = sel.value.split('|');
+              userOverrides[id] = { section, category, note: `Grouped tag: ${g.display_name}` };
+            }
+          });
+          saveOverrides();
+          recomputeState();
+          renderAll();
+        });
+      });
+
+      wrap.querySelectorAll('.group-inspect-btn').forEach(btn => {
+        const g = groups[Number(btn.dataset.gidx)];
+        const idSet = new Set(g.txn_ids);
+        btn.addEventListener('click', () => openDrawer(g.display_name, 'Counterparty group transactions', e => idSet.has(e.id), 'ALL'));
+      });
+    } else {
+      // Individual transactions mode
+      const origUnknownIds = new Set(RAW.ledger.filter(e => e.section === 'Needs Review' || e.question).map(e => e.id));
+      const items = STATE.ledger
+        .filter(e => origUnknownIds.has(e.id) && (filterMode === 'all' || e.section === 'Needs Review'))
+        .sort((a, b) => Math.abs(b.amount) - Math.abs(a.amount));
+
+      wrap.innerHTML = `
+        <table>
+          <thead>
+            <tr>
+              <th>Date &amp; ID</th>
+              <th>Bank Account &amp; Narration</th>
+              <th class="right">Amount</th>
+              <th>Assign Classification</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${items.map(e => {
+              const curVal = e.section === 'Needs Review' ? '' : `${e.section}|${e.category}`;
+              const hasPreset = OWNER_PRESETS.some(p => p.value === curVal);
+              return `
+                <tr>
+                  <td style="white-space:nowrap;"><strong>${esc(e.date)}</strong><div class="muted" style="font-size:11.5px;">${esc(e.id)}</div></td>
+                  <td style="max-width:420px;">
+                    <div style="font-weight:500;">${esc(e.description)}</div>
+                    <div class="muted" style="font-size:11.5px;">${esc(e.account)} • Statement ${esc(e.statement)} p.${esc(e.pages)}</div>
+                  </td>
+                  <td class="right num ${e.amount >= 0 ? 'pos' : 'neg'}" style="font-weight:700;white-space:nowrap;">${fmt(e.amount, true)}</td>
+                  <td>
+                    <select class="item-tag-select" data-id="${esc(e.id)}" style="width:100%;max-width:330px;">
+                      ${!hasPreset && curVal ? `<option value="${esc(curVal)}" selected>${esc(e.section)}: ${esc(e.category)}</option>` : ''}
+                      ${OWNER_PRESETS.map(p => `<option value="${esc(p.value)}" ${p.value === curVal ? 'selected' : ''}>${esc(p.label)}</option>`).join('')}
+                    </select>
+                  </td>
+                </tr>`;
+            }).join('')}
+          </tbody>
+        </table>`;
+
+      wrap.querySelectorAll('.item-tag-select').forEach(sel => {
+        sel.addEventListener('change', () => {
+          applySingleTag(sel.dataset.id, sel.value);
+          renderAll();
+        });
+      });
+    }
+  }
+
+  // TAB 4A: Detailed Monthly P&L
+  function renderDetailedPnl() {
+    const sections = ['Revenue', 'Direct costs', 'Operating expenses', 'Taxes', 'Bank fees'];
+    const secLabels = {
+      'Revenue': 'Revenue',
+      'Direct costs': DIRECT_LABEL,
+      'Operating expenses': 'Operating Expenses',
+      'Taxes': 'Taxes & Statutory Levies',
+      'Bank fees': 'Bank & Payment Fees'
+    };
+
+    const detDrill = [];
+    let body = '';
+
+    sections.forEach(sec => {
+      const negate = sec !== 'Revenue';
+      const cats = [...new Set(STATE.ledger.filter(e => e.section === sec).map(e => e.category))].sort();
+      cats.forEach(cat => {
+        const did = detDrill.length;
+        detDrill.push({ title: `${cat} (${secLabels[sec]})`, pred: e => e.section === sec && e.category === cat });
+        const byM = {};
+        let tot = 0;
+        MONTHS.forEach(m => {
+          const s = STATE.ledger.filter(e => e.month === m && e.section === sec && e.category === cat).reduce((a, x) => a + x.amount, 0);
+          byM[m] = Math.round((negate ? -s : s) * 100) / 100;
+          tot = Math.round((tot + byM[m]) * 100) / 100;
+        });
+        body += `<tr class="drill-row" data-did="${did}">
+          <td>${esc(cat)}</td>
+          <td class="muted">${esc(secLabels[sec])}</td>
+          ${MONTHS.map(m => `<td class="right num cell-clickable" data-month="${m}">${fmt(byM[m])}</td>`).join('')}
+          <td class="right num cell-clickable" data-month="ALL"><strong>${fmt(tot)}</strong></td>
+        </tr>`;
+      });
+
+      const totMap = sec === 'Revenue' ? STATE.revM : sec === 'Direct costs' ? STATE.dcM : sec === 'Operating expenses' ? STATE.totOpexM : sec === 'Taxes' ? STATE.taxM : STATE.feeM;
+      body += `<tr class="row-subtotal">
+        <td colspan="2">Total ${esc(secLabels[sec])}</td>
+        ${MONTHS.map(m => `<td class="right num">${fmt(totMap[m])}</td>`).join('')}
+        <td class="right num">${fmt(totMap.ALL)}</td>
+      </tr>`;
+
+      if (sec === 'Direct costs') {
+        body += `<tr class="row-highlight">
+          <td colspan="2">GROSS PROFIT / (LOSS)</td>
+          ${MONTHS.map(m => `<td class="right num ${STATE.gpM[m] >= 0 ? 'pos' : 'neg'}">${fmt(STATE.gpM[m], true)}</td>`).join('')}
+          <td class="right num ${STATE.gpM.ALL >= 0 ? 'pos' : 'neg'}">${fmt(STATE.gpM.ALL, true)}</td>
+        </tr>`;
+      }
+      if (sec === 'Operating expenses') {
+        body += `<tr class="row-highlight">
+          <td colspan="2">OPERATING PROFIT / (LOSS)</td>
+          ${MONTHS.map(m => `<td class="right num ${STATE.opProfitM[m] >= 0 ? 'pos' : 'neg'}">${fmt(STATE.opProfitM[m], true)}</td>`).join('')}
+          <td class="right num ${STATE.opProfitM.ALL >= 0 ? 'pos' : 'neg'}">${fmt(STATE.opProfitM.ALL, true)}</td>
+        </tr>`;
+      }
+    });
+
+    body += `<tr class="row-highlight">
+      <td colspan="2">${STATE.openUnclassCount > 0 ? 'PROVISIONAL NET PROFIT / (LOSS)' : 'NET PROFIT / (LOSS)'}</td>
+      ${MONTHS.map(m => `<td class="right num ${STATE.netProfitM[m] >= 0 ? 'pos' : 'neg'}">${fmt(STATE.netProfitM[m], true)}</td>`).join('')}
+      <td class="right num ${STATE.netProfitM.ALL >= 0 ? 'pos' : 'neg'}">${fmt(STATE.netProfitM.ALL, true)}</td>
+    </tr>`;
+
+    const wrap = document.getElementById('detailed-pnl-wrap');
+    wrap.innerHTML = `
+      <table>
+        <thead>
+          <tr>
+            <th>Category</th>
+            <th>Section</th>
+            ${MONTHS.map(m => `<th class="right">${esc(monthName(m, true))}</th>`).join('')}
+            <th class="right">Cumulative</th>
+          </tr>
+        </thead>
+        <tbody>${body}</tbody>
+      </table>`;
+
+    wrap.querySelectorAll('tr.drill-row').forEach(tr => {
+      const d = detDrill[Number(tr.dataset.did)];
+      tr.addEventListener('dblclick', () => openDrawer(d.title, 'Detailed P&L category', d.pred, 'ALL'));
+      tr.querySelectorAll('td.cell-clickable').forEach(td => {
+        td.addEventListener('click', () => openDrawer(d.title, 'Detailed P&L category', d.pred, td.dataset.month));
+      });
+    });
+  }
+
+  // TAB 4B: Master Ledger Searchable Table
+  function renderMasterLedger() {
+    const q = document.getElementById('ledger-search').value.trim().toLowerCase();
+    const sec = document.getElementById('ledger-sec-filter').value;
+    const acct = document.getElementById('ledger-acct-filter').value;
+
+    const rows = STATE.ledger.filter(e => {
+      if (selectedPeriod !== 'ALL' && e.month !== selectedPeriod) return false;
+      if (sec !== 'ALL' && e.section !== sec) return false;
+      if (acct !== 'ALL' && e.account !== acct) return false;
+      if (!q) return true;
+      return `${e.id} ${e.raw_id} ${e.date} ${e.description} ${e.section} ${e.category} ${e.reference}`.toLowerCase().includes(q);
+    });
+
+    document.getElementById('ledger-table-wrap').innerHTML = `
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Date</th>
+            <th>Account</th>
+            <th>Description</th>
+            <th>Section</th>
+            <th>Category</th>
+            <th class="right">Amount</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${rows.map(e => `
+            <tr>
+              <td style="white-space:nowrap;font-size:12px;">${esc(e.id)}</td>
+              <td style="white-space:nowrap;">${esc(e.date)}</td>
+              <td style="white-space:nowrap;font-size:12.5px;">${esc(e.account)}</td>
+              <td style="max-width:390px;">${esc(e.description)}</td>
+              <td><span class="badge ${e.section === 'Needs Review' ? 'badge-amber' : 'badge-slate'}">${esc(e.section)}</span></td>
+              <td>${esc(e.category)}</td>
+              <td class="right num ${e.amount >= 0 ? 'pos' : 'neg'}" style="font-weight:600;white-space:nowrap;">${fmt(e.amount, true)}</td>
+            </tr>`).join('')}
+        </tbody>
+      </table>`;
+  }
+
+  // Export & Import JSON / CSV
+  function exportClassificationsJson() {
+    const payload = {
+      schema_version: '1.0',
+      exported_at: new Date().toISOString(),
+      business_profile: PROFILE,
+      category_group_overrides: (RAW.classifications_config && RAW.classifications_config.category_group_overrides) || {},
+      counterparty_rules: (RAW.classifications_config && RAW.classifications_config.counterparty_rules) || [],
+      transaction_overrides: userOverrides
+    };
+    const blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' });
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'classifications.json';
+    a.click();
+  }
+
+  function importClassificationsJson(ev) {
+    const file = ev.target.files && ev.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = () => {
+      try {
+        const parsed = JSON.parse(String(reader.result));
+        if (parsed.transaction_overrides) {
+          userOverrides = { ...userOverrides, ...parsed.transaction_overrides };
+          saveOverrides();
+          recomputeState();
+          renderAll();
+        }
+      } catch (err) {
+        alert('Invalid classifications.json file.');
+      }
+    };
+    reader.readAsText(file);
+  }
+
+  function exportLedgerCsv() {
+    const cols = ['id', 'raw_id', 'date', 'account', 'description', 'component', 'amount', 'section', 'summary_group', 'category', 'statement', 'pages'];
+    const csvCell = v => `"${String(v ?? '').replace(/"/g, '""')}"`;
+    const lines = [cols.join(',')];
+    STATE.ledger.forEach(e => lines.push(cols.map(c => csvCell(e[c])).join(',')));
+    const blob = new Blob(['\uFEFF' + lines.join('\n')], { type: 'text/csv;charset=utf-8;' });
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = `${PROFILE.business_name.replace(/\W+/g, '_')}_Ledger.csv`;
+    a.click();
+  }
+
+  function renderAll() {
+    renderHeaderBadges();
+    renderKpis();
+    renderMonthlyChart();
+    renderCostBars();
+    renderShortPnl();
+    renderHealthReport();
+    renderClassifyTab();
+    renderDetailedPnl();
+    renderMasterLedger();
+  }
+
+  recomputeState();
+  initControls();
+  renderAll();
+})();
+</script>
+</body>
+</html>

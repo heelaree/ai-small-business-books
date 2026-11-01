@@ -1,0 +1,20 @@
+# =============================================================================
+# PRIVACY GUARDRAIL: Never commit real client bank statements, local data, or outputs
+# (Public synthetic demo outputs live under docs/ and examples/output/)
+# =============================================================================
+*Bank_Statements*/
+statements/
+data/
+output/
+tmp/
+PROJECT_MEMORY.md
+~$*
+
+# Python & OS artifacts
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.env
+.DS_Store
+Thumbs.db

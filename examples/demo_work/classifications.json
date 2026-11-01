@@ -1,0 +1,15 @@
+{
+  "schema_version": "1.0",
+  "business_profile": {
+    "business_name": "Aura Studio & Spa (Demo)",
+    "legal_entity": "AURA STUDIO LLC",
+    "business_type": "service",
+    "industry": "Beauty & Wellness Studio",
+    "currency": "USD",
+    "direct_cost_label": "Cost of Providing Services",
+    "reporting_basis": "Cash basis"
+  },
+  "category_group_overrides": {},
+  "counterparty_rules": [],
+  "transaction_overrides": {}
+}
