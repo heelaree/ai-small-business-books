@@ -8,6 +8,8 @@
 /output/
 /tmp/
 /PROJECT_MEMORY.md
+/create_merseyside_sheet.gs
+/create_sheets_model.py
 ~$*
 
 # Python & OS artifacts
