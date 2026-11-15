@@ -1,0 +1,112 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "OwnerClassificationsConfig",
+  "description": "Durable owner confirmations and overrides exported from the HTML dashboard or recorded from chat answers.",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "business_profile",
+    "category_group_overrides",
+    "counterparty_rules",
+    "transaction_overrides"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "string"
+    },
+    "business_profile": {
+      "type": "object",
+      "required": [
+        "business_name",
+        "legal_entity",
+        "business_type",
+        "currency",
+        "direct_cost_label",
+        "reporting_basis"
+      ],
+      "properties": {
+        "business_name": {
+          "type": "string"
+        },
+        "legal_entity": {
+          "type": "string"
+        },
+        "business_type": {
+          "type": "string"
+        },
+        "industry": {
+          "type": "string"
+        },
+        "currency": {
+          "type": "string"
+        },
+        "direct_cost_label": {
+          "type": "string"
+        },
+        "reporting_basis": {
+          "type": "string"
+        }
+      }
+    },
+    "category_group_overrides": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
+    "counterparty_rules": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "section",
+          "category"
+        ],
+        "properties": {
+          "counterparty_key": {
+            "type": "string"
+          },
+          "match_text": {
+            "type": "string"
+          },
+          "section": {
+            "type": "string"
+          },
+          "category": {
+            "type": "string"
+          },
+          "note": {
+            "type": "string"
+          },
+          "provenance": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "transaction_overrides": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "required": [
+          "section",
+          "category"
+        ],
+        "properties": {
+          "section": {
+            "type": "string"
+          },
+          "category": {
+            "type": "string"
+          },
+          "note": {
+            "type": "string"
+          },
+          "provenance": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

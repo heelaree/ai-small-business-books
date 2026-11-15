@@ -101,6 +101,14 @@ Total classified P&L costs across the period equal **$26,655.00**, distributed a
 - **Statutory Taxes & Levies Recorded on Statements:** $240.00
 - **Matched Internal Account Transfers Excluded from P&L:** 6 pair(s) totaling $30,500.00 moved between supplied business accounts
 - **Open Verification & Scope Items:** 6 item(s) recorded in the Needs Review register
+- **Math Integrity Status:** `VERIFIED` (all bank settlements and bridges tie to 0.01)
+- **Accounting Completeness Status:** `PROVISIONAL_REVIEW_REQUIRED`
+- **Explicit Unverified Range (Outside Automated Statement Verification):**
+  - accrual_items_and_input_tax_recoverability
+  - business_purpose_of_unconfirmed_counterparties
+  - contents_of_encrypted_pdfs
+  - off_bank_cash_and_petty_cash
+  - visual_browser_rendering_and_js_interaction
 
 ---
 *Note: This report presents objective cash-basis accounting metrics and cost distributions derived strictly from supplied bank statements and confirmed classifications. It contains no financial advice or operational recommendations.*

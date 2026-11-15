@@ -194,6 +194,20 @@ def render_health_markdown(computed: dict[str, Any]) -> str:
     lines.append(
         f"- **Open Verification & Scope Items:** {h['open_review_count']} item(s) recorded in the Needs Review register"
     )
+    vdc_st = h.get("vdc_status") or {}
+    if vdc_st:
+        lines.append(
+            f"- **Math Integrity Status:** `{vdc_st.get('math_integrity', 'VERIFIED')}` "
+            f"(all bank settlements and bridges tie to 0.01)"
+        )
+        lines.append(
+            f"- **Accounting Completeness Status:** `{vdc_st.get('accounting_completeness', 'PROVISIONAL_REVIEW_REQUIRED')}`"
+        )
+        unver = vdc_st.get("unverified_range") or []
+        if unver:
+            lines.append("- **Explicit Unverified Range (Outside Automated Statement Verification):**")
+            for u_item in unver:
+                lines.append(f"  - {u_item}")
     lines.append("")
     lines.append("---")
     lines.append(

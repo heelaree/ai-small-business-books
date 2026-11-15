@@ -2261,6 +2261,7 @@
       "raw_id": "B0001",
       "id": "B0001-P",
       "amount": 2450.0,
+      "provenance": "statement_narration_rule",
       "component": "Principal",
       "transfer_id": ""
     },
@@ -2293,6 +2294,7 @@
       "raw_id": "B0001",
       "id": "B0001-F",
       "amount": -35.0,
+      "provenance": "embedded_fee_split",
       "component": "Embedded fee",
       "transfer_id": ""
     },
@@ -2325,6 +2327,7 @@
       "raw_id": "B0002",
       "id": "B0002-P",
       "amount": -680.0,
+      "provenance": "statement_narration_rule",
       "component": "Principal",
       "transfer_id": ""
     },
@@ -2357,6 +2360,7 @@
       "raw_id": "B0003",
       "id": "B0003-P",
       "amount": -1450.0,
+      "provenance": "statement_narration_rule",
       "component": "Principal",
       "transfer_id": ""
     },
@@ -2389,6 +2393,7 @@
       "raw_id": "B0004",
       "id": "B0004-P",
       "amount": 1980.0,
+      "provenance": "statement_narration_rule",
       "component": "Principal",
       "transfer_id": ""
     },
@@ -2421,6 +2426,7 @@
       "raw_id": "B0004",
       "id": "B0004-F",
       "amount": -28.0,
+      "provenance": "embedded_fee_split",
       "component": "Embedded fee",
       "transfer_id": ""
     },
@@ -2454,6 +2460,7 @@
       "transfer": "T001",
       "id": "B0005-P",
       "amount": -2500.0,
+      "provenance": "matched_transfer_pair",
       "component": "Principal",
       "transfer_id": "T001"
     },
@@ -2487,6 +2494,7 @@
       "transfer": "T001",
       "id": "B0005-F",
       "amount": -5.0,
+      "provenance": "embedded_fee_split",
       "component": "Embedded fee",
       "transfer_id": ""
     },
@@ -2520,6 +2528,7 @@
       "transfer": "T001",
       "id": "B0006-P",
       "amount": 2500.0,
+      "provenance": "matched_transfer_pair",
       "component": "Principal",
       "transfer_id": "T001"
     },
@@ -2552,6 +2561,7 @@
       "raw_id": "B0007",
       "id": "B0007-P",
       "amount": -520.0,
+      "provenance": "statement_narration_rule",
       "component": "Principal",
       "transfer_id": ""
     },
@@ -2584,6 +2594,7 @@
       "raw_id": "B0008",
       "id": "B0008-P",
       "amount": -215.0,
+      "provenance": "statement_narration_rule",
       "component": "Principal",
       "transfer_id": ""
     },
@@ -2616,6 +2627,7 @@
       "raw_id": "B0009",
       "id": "B0009-P",
       "amount": -310.0,
+      "provenance": "statement_narration_rule",
       "component": "Principal",
       "transfer_id": ""
     },
@@ -2648,6 +2660,7 @@
       "raw_id": "B0010",
       "id": "B0010-P",
       "amount": -1350.0,
+      "provenance": "statement_narration_rule",
       "component": "Principal",
       "transfer_id": ""
     },
@@ -2680,6 +2693,7 @@
       "raw_id": "B0011",
       "id": "B0011-P",
       "amount": 650.0,
+      "provenance": "unclassified_default",
       "component": "Principal",
       "transfer_id": ""
     },
@@ -2712,6 +2726,7 @@
       "raw_id": "B0012",
       "id": "B0012-P",
       "amount": -15.0,
+      "provenance": "statement_narration_rule",
       "component": "Principal",
       "transfer_id": ""
     },
@@ -2744,6 +2759,7 @@
       "raw_id": "B0013",
       "id": "B0013-P",
       "amount": 3120.0,
+      "provenance": "statement_narration_rule",
       "component": "Principal",
       "transfer_id": ""
     },
@@ -2776,6 +2792,7 @@
       "raw_id": "B0013",
       "id": "B0013-F",
       "amount": -44.0,
+      "provenance": "embedded_fee_split",
       "component": "Embedded fee",
       "transfer_id": ""
     },
@@ -2808,6 +2825,7 @@
       "raw_id": "B0014",
       "id": "B0014-P",
       "amount": -1450.0,
+      "provenance": "statement_narration_rule",
       "component": "Principal",
       "transfer_id": ""
     },
@@ -2840,6 +2858,7 @@
       "raw_id": "B0015",
       "id": "B0015-P",
       "amount": -840.0,
+      "provenance": "statement_narration_rule",
       "component": "Principal",
       "transfer_id": ""
     },
@@ -2872,6 +2891,7 @@
       "raw_id": "B0016",
       "id": "B0016-P",
       "amount": 2640.0,
+      "provenance": "statement_narration_rule",
       "component": "Principal",
       "transfer_id": ""
     },
@@ -2904,6 +2924,7 @@
       "raw_id": "B0016",
       "id": "B0016-F",
       "amount": -37.0,
+      "provenance": "embedded_fee_split",
       "component": "Embedded fee",
       "transfer_id": ""
     },
@@ -2937,6 +2958,7 @@
       "transfer": "T002",
       "id": "B0017-P",
       "amount": -4000.0,
+      "provenance": "matched_transfer_pair",
       "component": "Principal",
       "transfer_id": "T002"
     },
@@ -2970,6 +2992,7 @@
       "transfer": "T002",
       "id": "B0017-F",
       "amount": -5.0,
+      "provenance": "embedded_fee_split",
       "component": "Embedded fee",
       "transfer_id": ""
     },
@@ -3003,6 +3026,7 @@
       "transfer": "T002",
       "id": "B0018-P",
       "amount": 4000.0,
+      "provenance": "matched_transfer_pair",
       "component": "Principal",
       "transfer_id": "T002"
     },
@@ -3035,6 +3059,7 @@
       "raw_id": "B0019",
       "id": "B0019-P",
       "amount": -195.0,
+      "provenance": "statement_narration_rule",
       "component": "Principal",
       "transfer_id": ""
     },
@@ -3067,6 +3092,7 @@
       "raw_id": "B0020",
       "id": "B0020-P",
       "amount": -180.0,
+      "provenance": "statement_narration_rule",
       "component": "Principal",
       "transfer_id": ""
     },
@@ -3099,6 +3125,7 @@
       "raw_id": "B0021",
       "id": "B0021-P",
       "amount": -230.0,
+      "provenance": "statement_narration_rule",
       "component": "Principal",
       "transfer_id": ""
     },
@@ -3131,6 +3158,7 @@
       "raw_id": "B0022",
       "id": "B0022-P",
       "amount": -1350.0,
+      "provenance": "statement_narration_rule",
       "component": "Principal",
       "transfer_id": ""
     },
@@ -3163,6 +3191,7 @@
       "raw_id": "B0023",
       "id": "B0023-P",
       "amount": -95.0,
+      "provenance": "statement_narration_rule",
       "component": "Principal",
       "transfer_id": ""
     },
@@ -3195,6 +3224,7 @@
       "raw_id": "B0024",
       "id": "B0024-P",
       "amount": -15.0,
+      "provenance": "statement_narration_rule",
       "component": "Principal",
       "transfer_id": ""
     },
@@ -3227,6 +3257,7 @@
       "raw_id": "B0025",
       "id": "B0025-P",
       "amount": 2890.0,
+      "provenance": "statement_narration_rule",
       "component": "Principal",
       "transfer_id": ""
     },
@@ -3259,6 +3290,7 @@
       "raw_id": "B0025",
       "id": "B0025-F",
       "amount": -41.0,
+      "provenance": "embedded_fee_split",
       "component": "Embedded fee",
       "transfer_id": ""
     },
@@ -3291,6 +3323,7 @@
       "raw_id": "B0026",
       "id": "B0026-P",
       "amount": -1450.0,
+      "provenance": "statement_narration_rule",
       "component": "Principal",
       "transfer_id": ""
     },
@@ -3323,6 +3356,7 @@
       "raw_id": "B0027",
       "id": "B0027-P",
       "amount": -640.0,
+      "provenance": "statement_narration_rule",
       "component": "Principal",
       "transfer_id": ""
     },
@@ -3355,6 +3389,7 @@
       "raw_id": "B0028",
       "id": "B0028-P",
       "amount": 2750.0,
+      "provenance": "statement_narration_rule",
       "component": "Principal",
       "transfer_id": ""
     },
@@ -3387,6 +3422,7 @@
       "raw_id": "B0028",
       "id": "B0028-F",
       "amount": -39.0,
+      "provenance": "embedded_fee_split",
       "component": "Embedded fee",
       "transfer_id": ""
     },
@@ -3420,6 +3456,7 @@
       "transfer": "T003",
       "id": "B0029-P",
       "amount": -5000.0,
+      "provenance": "matched_transfer_pair",
       "component": "Principal",
       "transfer_id": "T003"
     },
@@ -3453,6 +3490,7 @@
       "transfer": "T003",
       "id": "B0029-F",
       "amount": -5.0,
+      "provenance": "embedded_fee_split",
       "component": "Embedded fee",
       "transfer_id": ""
     },
@@ -3486,6 +3524,7 @@
       "transfer": "T003",
       "id": "B0030-P",
       "amount": 5000.0,
+      "provenance": "matched_transfer_pair",
       "component": "Principal",
       "transfer_id": "T003"
     },
@@ -3518,6 +3557,7 @@
       "raw_id": "B0031",
       "id": "B0031-P",
       "amount": -420.0,
+      "provenance": "statement_narration_rule",
       "component": "Principal",
       "transfer_id": ""
     },
@@ -3550,6 +3590,7 @@
       "raw_id": "B0032",
       "id": "B0032-P",
       "amount": -340.0,
+      "provenance": "statement_narration_rule",
       "component": "Principal",
       "transfer_id": ""
     },
@@ -3582,6 +3623,7 @@
       "raw_id": "B0033",
       "id": "B0033-P",
       "amount": 650.0,
+      "provenance": "unclassified_default",
       "component": "Principal",
       "transfer_id": ""
     },
@@ -3614,6 +3656,7 @@
       "raw_id": "B0034",
       "id": "B0034-P",
       "amount": -240.0,
+      "provenance": "statement_narration_rule",
       "component": "Principal",
       "transfer_id": ""
     },
@@ -3646,6 +3689,7 @@
       "raw_id": "B0035",
       "id": "B0035-P",
       "amount": -1400.0,
+      "provenance": "statement_narration_rule",
       "component": "Principal",
       "transfer_id": ""
     },
@@ -3678,6 +3722,7 @@
       "raw_id": "B0036",
       "id": "B0036-P",
       "amount": -15.0,
+      "provenance": "statement_narration_rule",
       "component": "Principal",
       "transfer_id": ""
     },
@@ -3710,6 +3755,7 @@
       "raw_id": "B0037",
       "id": "B0037-P",
       "amount": 3340.0,
+      "provenance": "statement_narration_rule",
       "component": "Principal",
       "transfer_id": ""
     },
@@ -3742,6 +3788,7 @@
       "raw_id": "B0037",
       "id": "B0037-F",
       "amount": -47.0,
+      "provenance": "embedded_fee_split",
       "component": "Embedded fee",
       "transfer_id": ""
     },
@@ -3774,6 +3821,7 @@
       "raw_id": "B0038",
       "id": "B0038-P",
       "amount": -1450.0,
+      "provenance": "statement_narration_rule",
       "component": "Principal",
       "transfer_id": ""
     },
@@ -3806,6 +3854,7 @@
       "raw_id": "B0039",
       "id": "B0039-P",
       "amount": -910.0,
+      "provenance": "statement_narration_rule",
       "component": "Principal",
       "transfer_id": ""
     },
@@ -3838,6 +3887,7 @@
       "raw_id": "B0040",
       "id": "B0040-P",
       "amount": -1850.0,
+      "provenance": "statement_narration_rule",
       "component": "Principal",
       "transfer_id": ""
     },
@@ -3870,6 +3920,7 @@
       "raw_id": "B0041",
       "id": "B0041-P",
       "amount": 2910.0,
+      "provenance": "statement_narration_rule",
       "component": "Principal",
       "transfer_id": ""
     },
@@ -3902,6 +3953,7 @@
       "raw_id": "B0041",
       "id": "B0041-F",
       "amount": -42.0,
+      "provenance": "embedded_fee_split",
       "component": "Embedded fee",
       "transfer_id": ""
     },
@@ -3935,6 +3987,7 @@
       "transfer": "T004",
       "id": "B0042-P",
       "amount": -5500.0,
+      "provenance": "matched_transfer_pair",
       "component": "Principal",
       "transfer_id": "T004"
     },
@@ -3968,6 +4021,7 @@
       "transfer": "T004",
       "id": "B0042-F",
       "amount": -5.0,
+      "provenance": "embedded_fee_split",
       "component": "Embedded fee",
       "transfer_id": ""
     },
@@ -4001,6 +4055,7 @@
       "transfer": "T004",
       "id": "B0043-P",
       "amount": 5500.0,
+      "provenance": "matched_transfer_pair",
       "component": "Principal",
       "transfer_id": "T004"
     },
@@ -4033,6 +4088,7 @@
       "raw_id": "B0044",
       "id": "B0044-P",
       "amount": -225.0,
+      "provenance": "statement_narration_rule",
       "component": "Principal",
       "transfer_id": ""
     },
@@ -4065,6 +4121,7 @@
       "raw_id": "B0045",
       "id": "B0045-P",
       "amount": -115.0,
+      "provenance": "statement_narration_rule",
       "component": "Principal",
       "transfer_id": ""
     },
@@ -4097,6 +4154,7 @@
       "raw_id": "B0046",
       "id": "B0046-P",
       "amount": -480.0,
+      "provenance": "unclassified_default",
       "component": "Principal",
       "transfer_id": ""
     },
@@ -4129,6 +4187,7 @@
       "raw_id": "B0047",
       "id": "B0047-P",
       "amount": -1400.0,
+      "provenance": "statement_narration_rule",
       "component": "Principal",
       "transfer_id": ""
     },
@@ -4161,6 +4220,7 @@
       "raw_id": "B0048",
       "id": "B0048-P",
       "amount": -15.0,
+      "provenance": "statement_narration_rule",
       "component": "Principal",
       "transfer_id": ""
     },
@@ -4193,6 +4253,7 @@
       "raw_id": "B0049",
       "id": "B0049-P",
       "amount": 3580.0,
+      "provenance": "statement_narration_rule",
       "component": "Principal",
       "transfer_id": ""
     },
@@ -4225,6 +4286,7 @@
       "raw_id": "B0049",
       "id": "B0049-F",
       "amount": -51.0,
+      "provenance": "embedded_fee_split",
       "component": "Embedded fee",
       "transfer_id": ""
     },
@@ -4257,6 +4319,7 @@
       "raw_id": "B0050",
       "id": "B0050-P",
       "amount": -1450.0,
+      "provenance": "statement_narration_rule",
       "component": "Principal",
       "transfer_id": ""
     },
@@ -4289,6 +4352,7 @@
       "raw_id": "B0051",
       "id": "B0051-P",
       "amount": -710.0,
+      "provenance": "statement_narration_rule",
       "component": "Principal",
       "transfer_id": ""
     },
@@ -4321,6 +4385,7 @@
       "raw_id": "B0052",
       "id": "B0052-P",
       "amount": 3190.0,
+      "provenance": "statement_narration_rule",
       "component": "Principal",
       "transfer_id": ""
     },
@@ -4353,6 +4418,7 @@
       "raw_id": "B0052",
       "id": "B0052-F",
       "amount": -45.0,
+      "provenance": "embedded_fee_split",
       "component": "Embedded fee",
       "transfer_id": ""
     },
@@ -4386,6 +4452,7 @@
       "transfer": "T005",
       "id": "B0053-P",
       "amount": -6500.0,
+      "provenance": "matched_transfer_pair",
       "component": "Principal",
       "transfer_id": "T005"
     },
@@ -4419,6 +4486,7 @@
       "transfer": "T005",
       "id": "B0053-F",
       "amount": -5.0,
+      "provenance": "embedded_fee_split",
       "component": "Embedded fee",
       "transfer_id": ""
     },
@@ -4452,6 +4520,7 @@
       "transfer": "T005",
       "id": "B0054-P",
       "amount": 6500.0,
+      "provenance": "matched_transfer_pair",
       "component": "Principal",
       "transfer_id": "T005"
     },
@@ -4484,6 +4553,7 @@
       "raw_id": "B0055",
       "id": "B0055-P",
       "amount": -590.0,
+      "provenance": "statement_narration_rule",
       "component": "Principal",
       "transfer_id": ""
     },
@@ -4516,6 +4586,7 @@
       "raw_id": "B0056",
       "id": "B0056-P",
       "amount": -180.0,
+      "provenance": "statement_narration_rule",
       "component": "Principal",
       "transfer_id": ""
     },
@@ -4548,6 +4619,7 @@
       "raw_id": "B0057",
       "id": "B0057-P",
       "amount": 650.0,
+      "provenance": "unclassified_default",
       "component": "Principal",
       "transfer_id": ""
     },
@@ -4580,6 +4652,7 @@
       "raw_id": "B0058",
       "id": "B0058-P",
       "amount": 420.0,
+      "provenance": "unclassified_default",
       "component": "Principal",
       "transfer_id": ""
     },
@@ -4612,6 +4685,7 @@
       "raw_id": "B0059",
       "id": "B0059-P",
       "amount": -1450.0,
+      "provenance": "statement_narration_rule",
       "component": "Principal",
       "transfer_id": ""
     },
@@ -4644,6 +4718,7 @@
       "raw_id": "B0060",
       "id": "B0060-P",
       "amount": -15.0,
+      "provenance": "statement_narration_rule",
       "component": "Principal",
       "transfer_id": ""
     },
@@ -4676,6 +4751,7 @@
       "raw_id": "B0061",
       "id": "B0061-P",
       "amount": 3760.0,
+      "provenance": "statement_narration_rule",
       "component": "Principal",
       "transfer_id": ""
     },
@@ -4708,6 +4784,7 @@
       "raw_id": "B0061",
       "id": "B0061-F",
       "amount": -53.0,
+      "provenance": "embedded_fee_split",
       "component": "Embedded fee",
       "transfer_id": ""
     },
@@ -4740,6 +4817,7 @@
       "raw_id": "B0062",
       "id": "B0062-P",
       "amount": -1450.0,
+      "provenance": "statement_narration_rule",
       "component": "Principal",
       "transfer_id": ""
     },
@@ -4772,6 +4850,7 @@
       "raw_id": "B0063",
       "id": "B0063-P",
       "amount": -960.0,
+      "provenance": "statement_narration_rule",
       "component": "Principal",
       "transfer_id": ""
     },
@@ -4804,6 +4883,7 @@
       "raw_id": "B0064",
       "id": "B0064-P",
       "amount": 3410.0,
+      "provenance": "statement_narration_rule",
       "component": "Principal",
       "transfer_id": ""
     },
@@ -4836,6 +4916,7 @@
       "raw_id": "B0064",
       "id": "B0064-F",
       "amount": -48.0,
+      "provenance": "embedded_fee_split",
       "component": "Embedded fee",
       "transfer_id": ""
     },
@@ -4869,6 +4950,7 @@
       "transfer": "T006",
       "id": "B0065-P",
       "amount": -7000.0,
+      "provenance": "matched_transfer_pair",
       "component": "Principal",
       "transfer_id": "T006"
     },
@@ -4902,6 +4984,7 @@
       "transfer": "T006",
       "id": "B0065-F",
       "amount": -5.0,
+      "provenance": "embedded_fee_split",
       "component": "Embedded fee",
       "transfer_id": ""
     },
@@ -4935,6 +5018,7 @@
       "transfer": "T006",
       "id": "B0066-P",
       "amount": 7000.0,
+      "provenance": "matched_transfer_pair",
       "component": "Principal",
       "transfer_id": "T006"
     },
@@ -4967,6 +5051,7 @@
       "raw_id": "B0067",
       "id": "B0067-P",
       "amount": -310.0,
+      "provenance": "statement_narration_rule",
       "component": "Principal",
       "transfer_id": ""
     },
@@ -4999,6 +5084,7 @@
       "raw_id": "B0068",
       "id": "B0068-P",
       "amount": -115.0,
+      "provenance": "statement_narration_rule",
       "component": "Principal",
       "transfer_id": ""
     },
@@ -5031,6 +5117,7 @@
       "raw_id": "B0069",
       "id": "B0069-P",
       "amount": -360.0,
+      "provenance": "unclassified_default",
       "component": "Principal",
       "transfer_id": ""
     },
@@ -5063,6 +5150,7 @@
       "raw_id": "B0070",
       "id": "B0070-P",
       "amount": -1450.0,
+      "provenance": "statement_narration_rule",
       "component": "Principal",
       "transfer_id": ""
     },
@@ -5095,6 +5183,7 @@
       "raw_id": "B0071",
       "id": "B0071-P",
       "amount": -15.0,
+      "provenance": "statement_narration_rule",
       "component": "Principal",
       "transfer_id": ""
     }
@@ -5266,5 +5355,585 @@
       "resolution": ""
     }
   ],
-  "issues": []
+  "issues": [],
+  "vdc_report": {
+    "reference_version": "cash-basis-vdc-2026-11",
+    "deltas": [
+      {
+        "check_id": "stmt.D01.running_breaks",
+        "property": "D01 running balance breaks",
+        "expected": 0.0,
+        "measured": 0.0,
+        "delta": 0.0,
+        "tolerance": 0.0,
+        "provenance": "input_premeasurement",
+        "status": "pass"
+      },
+      {
+        "check_id": "stmt.D01.ending_diff",
+        "property": "D01 chained closing vs header closing",
+        "expected": 2860.0,
+        "measured": 2860.0,
+        "delta": 0.0,
+        "tolerance": 0.01,
+        "provenance": "statement_header_control",
+        "status": "pass"
+      },
+      {
+        "check_id": "stmt.D01.credits_diff",
+        "property": "D01 extracted credits vs header credits",
+        "expected": 3150.0,
+        "measured": 3150.0,
+        "delta": 0.0,
+        "tolerance": 0.01,
+        "provenance": "statement_header_control",
+        "status": "pass"
+      },
+      {
+        "check_id": "stmt.D01.debits_diff",
+        "property": "D01 extracted debits vs header debits",
+        "expected": 4540.0,
+        "measured": 4540.0,
+        "delta": 0.0,
+        "tolerance": 0.01,
+        "provenance": "statement_header_control",
+        "status": "pass"
+      },
+      {
+        "check_id": "stmt.D02.running_breaks",
+        "property": "D02 running balance breaks",
+        "expected": 0.0,
+        "measured": 0.0,
+        "delta": 0.0,
+        "tolerance": 0.0,
+        "provenance": "input_premeasurement",
+        "status": "pass"
+      },
+      {
+        "check_id": "stmt.D02.ending_diff",
+        "property": "D02 chained closing vs header closing",
+        "expected": 2542.0,
+        "measured": 2542.0,
+        "delta": 0.0,
+        "tolerance": 0.01,
+        "provenance": "statement_header_control",
+        "status": "pass"
+      },
+      {
+        "check_id": "stmt.D02.credits_diff",
+        "property": "D02 extracted credits vs header credits",
+        "expected": 4367.0,
+        "measured": 4367.0,
+        "delta": 0.0,
+        "tolerance": 0.01,
+        "provenance": "statement_header_control",
+        "status": "pass"
+      },
+      {
+        "check_id": "stmt.D02.debits_diff",
+        "property": "D02 extracted debits vs header debits",
+        "expected": 2505.0,
+        "measured": 2505.0,
+        "delta": 0.0,
+        "tolerance": 0.01,
+        "provenance": "statement_header_control",
+        "status": "pass"
+      },
+      {
+        "check_id": "stmt.D03.running_breaks",
+        "property": "D03 running balance breaks",
+        "expected": 0.0,
+        "measured": 0.0,
+        "delta": 0.0,
+        "tolerance": 0.0,
+        "provenance": "input_premeasurement",
+        "status": "pass"
+      },
+      {
+        "check_id": "stmt.D03.ending_diff",
+        "property": "D03 chained closing vs header closing",
+        "expected": 2505.0,
+        "measured": 2505.0,
+        "delta": 0.0,
+        "tolerance": 0.01,
+        "provenance": "statement_header_control",
+        "status": "pass"
+      },
+      {
+        "check_id": "stmt.D03.credits_diff",
+        "property": "D03 extracted credits vs header credits",
+        "expected": 4000.0,
+        "measured": 4000.0,
+        "delta": 0.0,
+        "tolerance": 0.01,
+        "provenance": "statement_header_control",
+        "status": "pass"
+      },
+      {
+        "check_id": "stmt.D03.debits_diff",
+        "property": "D03 extracted debits vs header debits",
+        "expected": 4355.0,
+        "measured": 4355.0,
+        "delta": 0.0,
+        "tolerance": 0.01,
+        "provenance": "statement_header_control",
+        "status": "pass"
+      },
+      {
+        "check_id": "stmt.D04.running_breaks",
+        "property": "D04 running balance breaks",
+        "expected": 0.0,
+        "measured": 0.0,
+        "delta": 0.0,
+        "tolerance": 0.0,
+        "provenance": "input_premeasurement",
+        "status": "pass"
+      },
+      {
+        "check_id": "stmt.D04.ending_diff",
+        "property": "D04 chained closing vs header closing",
+        "expected": 4216.0,
+        "measured": 4216.0,
+        "delta": 0.0,
+        "tolerance": 0.01,
+        "provenance": "statement_header_control",
+        "status": "pass"
+      },
+      {
+        "check_id": "stmt.D04.credits_diff",
+        "property": "D04 extracted credits vs header credits",
+        "expected": 5679.0,
+        "measured": 5679.0,
+        "delta": 0.0,
+        "tolerance": 0.01,
+        "provenance": "statement_header_control",
+        "status": "pass"
+      },
+      {
+        "check_id": "stmt.D04.debits_diff",
+        "property": "D04 extracted debits vs header debits",
+        "expected": 4005.0,
+        "measured": 4005.0,
+        "delta": 0.0,
+        "tolerance": 0.01,
+        "provenance": "statement_header_control",
+        "status": "pass"
+      },
+      {
+        "check_id": "stmt.D05.running_breaks",
+        "property": "D05 running balance breaks",
+        "expected": 0.0,
+        "measured": 0.0,
+        "delta": 0.0,
+        "tolerance": 0.0,
+        "provenance": "input_premeasurement",
+        "status": "pass"
+      },
+      {
+        "check_id": "stmt.D05.ending_diff",
+        "property": "D05 chained closing vs header closing",
+        "expected": 3650.0,
+        "measured": 3650.0,
+        "delta": 0.0,
+        "tolerance": 0.01,
+        "provenance": "statement_header_control",
+        "status": "pass"
+      },
+      {
+        "check_id": "stmt.D05.credits_diff",
+        "property": "D05 extracted credits vs header credits",
+        "expected": 5650.0,
+        "measured": 5650.0,
+        "delta": 0.0,
+        "tolerance": 0.01,
+        "provenance": "statement_header_control",
+        "status": "pass"
+      },
+      {
+        "check_id": "stmt.D05.debits_diff",
+        "property": "D05 extracted debits vs header debits",
+        "expected": 4505.0,
+        "measured": 4505.0,
+        "delta": 0.0,
+        "tolerance": 0.01,
+        "provenance": "statement_header_control",
+        "status": "pass"
+      },
+      {
+        "check_id": "stmt.D06.running_breaks",
+        "property": "D06 running balance breaks",
+        "expected": 0.0,
+        "measured": 0.0,
+        "delta": 0.0,
+        "tolerance": 0.0,
+        "provenance": "input_premeasurement",
+        "status": "pass"
+      },
+      {
+        "check_id": "stmt.D06.ending_diff",
+        "property": "D06 chained closing vs header closing",
+        "expected": 4771.0,
+        "measured": 4771.0,
+        "delta": 0.0,
+        "tolerance": 0.01,
+        "provenance": "statement_header_control",
+        "status": "pass"
+      },
+      {
+        "check_id": "stmt.D06.credits_diff",
+        "property": "D06 extracted credits vs header credits",
+        "expected": 5560.0,
+        "measured": 5560.0,
+        "delta": 0.0,
+        "tolerance": 0.01,
+        "provenance": "statement_header_control",
+        "status": "pass"
+      },
+      {
+        "check_id": "stmt.D06.debits_diff",
+        "property": "D06 extracted debits vs header debits",
+        "expected": 5005.0,
+        "measured": 5005.0,
+        "delta": 0.0,
+        "tolerance": 0.01,
+        "provenance": "statement_header_control",
+        "status": "pass"
+      },
+      {
+        "check_id": "stmt.D07.running_breaks",
+        "property": "D07 running balance breaks",
+        "expected": 0.0,
+        "measured": 0.0,
+        "delta": 0.0,
+        "tolerance": 0.0,
+        "provenance": "input_premeasurement",
+        "status": "pass"
+      },
+      {
+        "check_id": "stmt.D07.ending_diff",
+        "property": "D07 chained closing vs header closing",
+        "expected": 2705.0,
+        "measured": 2705.0,
+        "delta": 0.0,
+        "tolerance": 0.01,
+        "provenance": "statement_header_control",
+        "status": "pass"
+      },
+      {
+        "check_id": "stmt.D07.credits_diff",
+        "property": "D07 extracted credits vs header credits",
+        "expected": 5500.0,
+        "measured": 5500.0,
+        "delta": 0.0,
+        "tolerance": 0.01,
+        "provenance": "statement_header_control",
+        "status": "pass"
+      },
+      {
+        "check_id": "stmt.D07.debits_diff",
+        "property": "D07 extracted debits vs header debits",
+        "expected": 6445.0,
+        "measured": 6445.0,
+        "delta": 0.0,
+        "tolerance": 0.01,
+        "provenance": "statement_header_control",
+        "status": "pass"
+      },
+      {
+        "check_id": "stmt.D08.running_breaks",
+        "property": "D08 running balance breaks",
+        "expected": 0.0,
+        "measured": 0.0,
+        "delta": 0.0,
+        "tolerance": 0.0,
+        "provenance": "input_premeasurement",
+        "status": "pass"
+      },
+      {
+        "check_id": "stmt.D08.ending_diff",
+        "property": "D08 chained closing vs header closing",
+        "expected": 5427.0,
+        "measured": 5427.0,
+        "delta": 0.0,
+        "tolerance": 0.01,
+        "provenance": "statement_header_control",
+        "status": "pass"
+      },
+      {
+        "check_id": "stmt.D08.credits_diff",
+        "property": "D08 extracted credits vs header credits",
+        "expected": 6161.0,
+        "measured": 6161.0,
+        "delta": 0.0,
+        "tolerance": 0.01,
+        "provenance": "statement_header_control",
+        "status": "pass"
+      },
+      {
+        "check_id": "stmt.D08.debits_diff",
+        "property": "D08 extracted debits vs header debits",
+        "expected": 5505.0,
+        "measured": 5505.0,
+        "delta": 0.0,
+        "tolerance": 0.01,
+        "provenance": "statement_header_control",
+        "status": "pass"
+      },
+      {
+        "check_id": "stmt.D09.running_breaks",
+        "property": "D09 running balance breaks",
+        "expected": 0.0,
+        "measured": 0.0,
+        "delta": 0.0,
+        "tolerance": 0.0,
+        "provenance": "input_premeasurement",
+        "status": "pass"
+      },
+      {
+        "check_id": "stmt.D09.ending_diff",
+        "property": "D09 chained closing vs header closing",
+        "expected": 5880.0,
+        "measured": 5880.0,
+        "delta": 0.0,
+        "tolerance": 0.01,
+        "provenance": "statement_header_control",
+        "status": "pass"
+      },
+      {
+        "check_id": "stmt.D09.credits_diff",
+        "property": "D09 extracted credits vs header credits",
+        "expected": 7570.0,
+        "measured": 7570.0,
+        "delta": 0.0,
+        "tolerance": 0.01,
+        "provenance": "statement_header_control",
+        "status": "pass"
+      },
+      {
+        "check_id": "stmt.D09.debits_diff",
+        "property": "D09 extracted debits vs header debits",
+        "expected": 4395.0,
+        "measured": 4395.0,
+        "delta": 0.0,
+        "tolerance": 0.01,
+        "provenance": "statement_header_control",
+        "status": "pass"
+      },
+      {
+        "check_id": "stmt.D10.running_breaks",
+        "property": "D10 running balance breaks",
+        "expected": 0.0,
+        "measured": 0.0,
+        "delta": 0.0,
+        "tolerance": 0.0,
+        "provenance": "input_premeasurement",
+        "status": "pass"
+      },
+      {
+        "check_id": "stmt.D10.ending_diff",
+        "property": "D10 chained closing vs header closing",
+        "expected": 5596.0,
+        "measured": 5596.0,
+        "delta": 0.0,
+        "tolerance": 0.01,
+        "provenance": "statement_header_control",
+        "status": "pass"
+      },
+      {
+        "check_id": "stmt.D10.credits_diff",
+        "property": "D10 extracted credits vs header credits",
+        "expected": 6674.0,
+        "measured": 6674.0,
+        "delta": 0.0,
+        "tolerance": 0.01,
+        "provenance": "statement_header_control",
+        "status": "pass"
+      },
+      {
+        "check_id": "stmt.D10.debits_diff",
+        "property": "D10 extracted debits vs header debits",
+        "expected": 6505.0,
+        "measured": 6505.0,
+        "delta": 0.0,
+        "tolerance": 0.01,
+        "provenance": "statement_header_control",
+        "status": "pass"
+      },
+      {
+        "check_id": "stmt.D11.running_breaks",
+        "property": "D11 running balance breaks",
+        "expected": 0.0,
+        "measured": 0.0,
+        "delta": 0.0,
+        "tolerance": 0.0,
+        "provenance": "input_premeasurement",
+        "status": "pass"
+      },
+      {
+        "check_id": "stmt.D11.ending_diff",
+        "property": "D11 chained closing vs header closing",
+        "expected": 8220.0,
+        "measured": 8220.0,
+        "delta": 0.0,
+        "tolerance": 0.01,
+        "provenance": "statement_header_control",
+        "status": "pass"
+      },
+      {
+        "check_id": "stmt.D11.credits_diff",
+        "property": "D11 extracted credits vs header credits",
+        "expected": 7000.0,
+        "measured": 7000.0,
+        "delta": 0.0,
+        "tolerance": 0.01,
+        "provenance": "statement_header_control",
+        "status": "pass"
+      },
+      {
+        "check_id": "stmt.D11.debits_diff",
+        "property": "D11 extracted debits vs header debits",
+        "expected": 4660.0,
+        "measured": 4660.0,
+        "delta": 0.0,
+        "tolerance": 0.01,
+        "provenance": "statement_header_control",
+        "status": "pass"
+      },
+      {
+        "check_id": "stmt.D12.running_breaks",
+        "property": "D12 running balance breaks",
+        "expected": 0.0,
+        "measured": 0.0,
+        "delta": 0.0,
+        "tolerance": 0.0,
+        "provenance": "input_premeasurement",
+        "status": "pass"
+      },
+      {
+        "check_id": "stmt.D12.ending_diff",
+        "property": "D12 chained closing vs header closing",
+        "expected": 5660.0,
+        "measured": 5660.0,
+        "delta": 0.0,
+        "tolerance": 0.01,
+        "provenance": "statement_header_control",
+        "status": "pass"
+      },
+      {
+        "check_id": "stmt.D12.credits_diff",
+        "property": "D12 extracted credits vs header credits",
+        "expected": 7069.0,
+        "measured": 7069.0,
+        "delta": 0.0,
+        "tolerance": 0.01,
+        "provenance": "statement_header_control",
+        "status": "pass"
+      },
+      {
+        "check_id": "stmt.D12.debits_diff",
+        "property": "D12 extracted debits vs header debits",
+        "expected": 7005.0,
+        "measured": 7005.0,
+        "delta": 0.0,
+        "tolerance": 0.01,
+        "provenance": "statement_header_control",
+        "status": "pass"
+      },
+      {
+        "check_id": "reconcile.ledger_vs_raw_net",
+        "property": "split ledger net vs raw bank net",
+        "expected": 8950.0,
+        "measured": 8950.0,
+        "delta": 0.0,
+        "tolerance": 0.01,
+        "provenance": "input_premeasurement",
+        "status": "pass"
+      },
+      {
+        "check_id": "reconcile.transfer.T001",
+        "property": "transfer T001 net pair",
+        "expected": 0.0,
+        "measured": 0.0,
+        "delta": 0.0,
+        "tolerance": 0.01,
+        "provenance": "matched_transfer_pair",
+        "status": "pass"
+      },
+      {
+        "check_id": "reconcile.transfer.T002",
+        "property": "transfer T002 net pair",
+        "expected": 0.0,
+        "measured": 0.0,
+        "delta": 0.0,
+        "tolerance": 0.01,
+        "provenance": "matched_transfer_pair",
+        "status": "pass"
+      },
+      {
+        "check_id": "reconcile.transfer.T003",
+        "property": "transfer T003 net pair",
+        "expected": 0.0,
+        "measured": 0.0,
+        "delta": 0.0,
+        "tolerance": 0.01,
+        "provenance": "matched_transfer_pair",
+        "status": "pass"
+      },
+      {
+        "check_id": "reconcile.transfer.T004",
+        "property": "transfer T004 net pair",
+        "expected": 0.0,
+        "measured": 0.0,
+        "delta": 0.0,
+        "tolerance": 0.01,
+        "provenance": "matched_transfer_pair",
+        "status": "pass"
+      },
+      {
+        "check_id": "reconcile.transfer.T005",
+        "property": "transfer T005 net pair",
+        "expected": 0.0,
+        "measured": 0.0,
+        "delta": 0.0,
+        "tolerance": 0.01,
+        "provenance": "matched_transfer_pair",
+        "status": "pass"
+      },
+      {
+        "check_id": "reconcile.transfer.T006",
+        "property": "transfer T006 net pair",
+        "expected": 0.0,
+        "measured": 0.0,
+        "delta": 0.0,
+        "tolerance": 0.01,
+        "provenance": "matched_transfer_pair",
+        "status": "pass"
+      },
+      {
+        "check_id": "reconcile.downgraded_unverified_claims",
+        "property": "ungrounded classifications downgraded to Needs Review",
+        "expected": 0.0,
+        "measured": 0.0,
+        "delta": 0.0,
+        "tolerance": 0.0,
+        "provenance": "specification",
+        "status": "pass",
+        "notes": "Non-zero means agent-proposed P&L tags lacked narration support or owner provenance and were safely quarantined."
+      }
+    ],
+    "unverified_range": [
+      "accrual_items_and_input_tax_recoverability",
+      "business_purpose_of_unconfirmed_counterparties",
+      "contents_of_encrypted_pdfs",
+      "off_bank_cash_and_petty_cash"
+    ],
+    "verdict": {
+      "math_integrity": "VERIFIED",
+      "accounting_completeness": "PROVISIONAL_REVIEW_REQUIRED"
+    },
+    "attribution": {
+      "state": "none",
+      "grounds": "All readable statement running balances, header controls, transfers, and fee splits reconciled."
+    }
+  }
 }

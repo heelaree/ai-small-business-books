@@ -14,6 +14,8 @@ from pathlib import Path
 import re
 from typing import Any
 
+from _contract import UNVERIFIED_PROPERTIES
+
 CURRENCY_SYMBOLS: dict[str, str] = {
     "NGN": "₦",
     "USD": "$",
@@ -237,12 +239,14 @@ def load_and_compute(
             e["section"] = applied["section"]
             e["category"] = applied.get("category") or e["category"]
             e["user_classified"] = True
+            e["provenance"] = applied.get("provenance") or "owner_confirmed"
             e["user_note"] = applied.get("note", "Confirmed by business owner")
             e["question"] = ""
             e["review_type"] = ""
             resolved_ids[e["id"]] = applied
         else:
             e["user_classified"] = False
+            e["provenance"] = orig.get("provenance") or ("unclassified_default" if e["section"] == "Needs Review" else "statement_narration_rule")
             e["user_note"] = ""
 
         e["summary_group"] = infer_summary_group(
@@ -528,6 +532,29 @@ def load_and_compute(
             rc["included"] = 1
             all_source_rows.append(rc)
 
+    encrypted_doc_count = sum(1 for d in docs if d.get("encrypted") or d.get("error"))
+    unclassified_in_cnt = sum(1 for e in ledger if e["section"] == "Needs Review" and e["amount"] > 0)
+    unclassified_out_cnt = sum(1 for e in ledger if e["section"] == "Needs Review" and e["amount"] < 0)
+    open_review_cnt = sum(1 for r in review_items if r["status"] == "Open") + len(raw_books.get("issues", []))
+
+    upstream_vdc = raw_books.get("vdc_report") or {}
+    upstream_math = upstream_vdc.get("verdict", {}).get("math_integrity", "VERIFIED")
+    completeness_verdict = (
+        "VERIFIED"
+        if (
+            unclassified_in_cnt == 0
+            and unclassified_out_cnt == 0
+            and len(raw_books.get("issues", [])) == 0
+            and encrypted_doc_count == 0
+        )
+        else "PROVISIONAL_REVIEW_REQUIRED"
+    )
+    unverified_range = sorted(
+        set(UNVERIFIED_PROPERTIES["build_all"])
+        | set(upstream_vdc.get("unverified_range", []))
+        | {f"{iss[0]}: {iss[1]}" for iss in raw_books.get("issues", [])}
+    )
+
     health = {
         "opening_cash": opening_by_m["total"],
         "closing_cash": closing_by_m["total"],
@@ -559,9 +586,15 @@ def load_and_compute(
         "taxes_total": tax_m["total"],
         "inflow_classified_pct": round(classified_in / ext_in_total * 100.0, 1) if ext_in_total > 0 else 100.0,
         "outflow_classified_pct": round(classified_out / ext_out_total * 100.0, 1) if ext_out_total > 0 else 100.0,
-        "unclassified_in_count": sum(1 for e in ledger if e["section"] == "Needs Review" and e["amount"] > 0),
-        "unclassified_out_count": sum(1 for e in ledger if e["section"] == "Needs Review" and e["amount"] < 0),
-        "open_review_count": sum(1 for r in review_items if r["status"] == "Open") + len(raw_books.get("issues", [])),
+        "unclassified_in_count": unclassified_in_cnt,
+        "unclassified_out_count": unclassified_out_cnt,
+        "open_review_count": open_review_cnt,
+        "encrypted_document_count": encrypted_doc_count,
+        "vdc_status": {
+            "math_integrity": upstream_math,
+            "accounting_completeness": completeness_verdict,
+            "unverified_range": unverified_range,
+        },
     }
 
     return {
@@ -582,6 +615,7 @@ def load_and_compute(
         "scope_issues": raw_books.get("issues", []),
         "smart_review_groups": smart_groups,
         "account_cash": account_cash,
+        "vdc_report": upstream_vdc,
         "summary_pnl": {
             "revenue": rev_m,
             "direct_costs": dc_m,
