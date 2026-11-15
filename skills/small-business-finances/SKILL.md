@@ -24,10 +24,14 @@ This skill pairs **LLM judgment** (reading messy bank statement formats, groupin
    In all Financial Health outputs and chat summaries, report **only objective facts** (liquidity, cost shares, monthly volatility, fee friction, and data completeness). **Never** emit unsolicited business advice, cost-cutting recommendations, or operational suggestions (e.g., never write *"You should reduce marketing spend"* or *"Consider switching from fuel to solar"*). See [references/financial_health_spec.md](./references/financial_health_spec.md).
 3. **Conservative Cash-Basis Accounting:**
    Never assume an ambiguous bank inflow is revenue or an ambiguous outflow is an operating expense. Keep uncertain items in `Needs Review` and show them transparently in the **Cash Reconciliation Bridge** until the owner confirms them. See [references/accounting_policies.md](./references/accounting_policies.md).
-4. **Zero Mental Math:**
-   Never sum transactions manually in prompt reasoning. Always run the Python scripts in `scripts/` and confirm `verify_package.py` reports `"status": "PASSED"`.
+4. **Zero Mental Math & Verification-Driven Discipline (Kajiyama, 2026):**
+   Never sum transactions manually in prompt reasoning and never trust unverified LLM labels. Always:
+   - Inspect the machine-readable contract (`python scripts/_contract.py --json`) and runtime (`python scripts/_contract.py doctor`).
+   - Pre-measure statement files before parsing (`python scripts/probe_statements.py --dir <statements_dir> --json`), explicitly marking encrypted/unreadable PDFs as `unknown_encrypted`.
+   - Enforce provenance on classifications: every non-`Needs Review` row must carry deterministic narration support or explicit owner confirmation in `classifications.json`.
+   - Confirm `verify_package.py` reports `"status": "PASSED"` and `"math_integrity_verdict": "VERIFIED"`, while honoring the completeness cap (`"PROVISIONAL_REVIEW_REQUIRED"` whenever any `Needs Review` items, missing dates, or encrypted backups exist) and co-reporting `unverified_range`.
 5. **Durable Owner Classifications (`classifications.json`):**
-   Store every owner confirmation in `classifications.json` (either exported by the owner from the HTML dashboard or recorded from chat answers) so re-running scripts never overwrites user work.
+   Store every owner confirmation in `classifications.json` matching [references/classifications.schema.json](./references/classifications.schema.json) (either exported by the owner from the HTML dashboard or recorded from chat answers) so re-running scripts never overwrites user work.
 
 ---
 
@@ -42,6 +46,18 @@ pip install openpyxl pdfplumber pypdf
 ---
 
 ## End-to-End Workflow
+
+### Step 0: Runtime & Statement Pre-Measurement (Probe First)
+1. Check dependencies and contract:
+   ```bash
+   python scripts/_contract.py doctor
+   python scripts/_contract.py --json
+   ```
+2. Pre-measure the raw statement directory before parsing:
+   ```bash
+   python scripts/probe_statements.py --dir <statements_dir> --json
+   ```
+   Record any `unknown_encrypted` or unreadable files rather than silently dropping them.
 
 ### Step 1: Intake & Business Profile Setup
 1. Inventory all supplied bank/wallet statement files (PDFs, CSVs, XLSX) and note covered accounts, currencies, and date ranges.
@@ -69,18 +85,20 @@ pip install openpyxl pdfplumber pypdf
    ```
 
 ### Step 2: Statement Extraction & Balance-Chain Reconciliation
-1. Parse each readable statement into normalized JSON matching `parsed_statements.json` in [references/books_data.schema.json](./references/books_data.schema.json):
+1. Parse each readable statement into normalized JSON matching [references/parsed_statements.schema.json](./references/parsed_statements.schema.json):
    - Capture header controls (`opening`, `closing`, `credits`, `debits`, `start`, `end`, `account`, `currency`).
    - Extract each transaction (`seq`, `date`, `datetime`, `description`, `debit`, `credit`, `balance`, `charge`, `counterparty`, `source_account`, `reference`, `pages`).
-   - Apply conservative rule-based `section` and `category` only where statement narrations clearly establish business purpose; leave ambiguous items as `section: "Needs Review"`.
-2. Run deterministic reconciliation to chain running balances, remove overlapping consolidated duplicates, pair same-day internal transfers between supplied accounts, and split embedded fees:
+   - Apply conservative rule-based `section` and `category` only where statement narrations clearly establish business purpose (`provenance: "statement_narration_rule"`); leave ambiguous items as `section: "Needs Review"`. Unverified claims without narration support are automatically downgraded by `reconcile_ledger.py`.
+2. Pre-measure extracted JSON and run deterministic reconciliation (`books_data.json` conforms to [references/books_data.schema.json](./references/books_data.schema.json)):
    ```bash
+   python scripts/probe_statements.py --parsed work/parsed_statements.json --json
    python scripts/reconcile_ledger.py \
      --parsed work/parsed_statements.json \
      --out work/books_data.json \
-     --entity-keyword "EXAMPLE STUDIO"
+     --entity-keyword "EXAMPLE STUDIO" \
+     --json
    ```
-3. Record any missing dates, mismatched final-month cutoffs, or unverified encrypted backup files in `books_data.json` under `"issues"`.
+3. Inspect `vdc_report` in `books_data.json`: confirm zero `running_breaks` and zero header control deltas (`credits_diff`, `debits_diff`, `ending_diff`). Any detected encrypted backups, missing calendar days, mixed final-month cutoffs, or unmatched own-account transfers are auto-populated under `"issues"` and `"unverified_range"`.
 
 ### Step 3: Build & Verify All Deliverables
 Run the single orchestrator command to generate and verify the entire 4-file output package:
@@ -105,3 +123,4 @@ python scripts/build_all.py \
 2. **Point the owner to `<slug>_Financial_Dashboard.html`** first so they can visually explore trends, double-click any line item to inspect transactions, or tag unknown counterparties directly in the browser.
 3. **Ask at most 2–3 high-impact classification questions at a time** (using the largest `smart_review_groups` by amount—often 2–3 recurring counterparties resolve 40–70% of unclassified value).
 4. **Apply Owner Confirmations:** Whenever the user answers in chat or provides an exported `classifications.json` from the dashboard, merge those entries into `work/classifications.json` and re-run `scripts/build_all.py`. Verify that reconciled bank cash never changes when classifications update.
+5. **Development-Time Evaluation (Optional / CI):** Run `python scripts/_contract.py check-drift` and `python scripts/probe_sensitivity.py --json` to verify schema/doc alignment and 10/10 seeded-defect sensitivity across `generate_dashboard.py`, `generate_health_report.py`, `generate_workbook.py`, `reconcile_ledger.py`, and `verify_package.py`.

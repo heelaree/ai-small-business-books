@@ -1,0 +1,166 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ParsedStatementsInput",
+  "description": "Canonical schema for parsed_statements.json consumed by reconcile_ledger.py and probe_statements.py.",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "required": [
+      "id",
+      "file"
+    ],
+    "properties": {
+      "id": {
+        "type": "string"
+      },
+      "file": {
+        "type": "string"
+      },
+      "sha256": {
+        "type": "string"
+      },
+      "encrypted": {
+        "type": "boolean"
+      },
+      "error": {
+        "type": "string"
+      },
+      "page_count": {
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "account": {
+        "type": "string"
+      },
+      "currency": {
+        "type": "string"
+      },
+      "owner": {
+        "type": "string"
+      },
+      "start": {
+        "type": "string",
+        "format": "date"
+      },
+      "end": {
+        "type": "string",
+        "format": "date"
+      },
+      "opening": {
+        "type": [
+          "number",
+          "null"
+        ]
+      },
+      "closing": {
+        "type": [
+          "number",
+          "null"
+        ]
+      },
+      "credits": {
+        "type": [
+          "number",
+          "null"
+        ]
+      },
+      "debits": {
+        "type": [
+          "number",
+          "null"
+        ]
+      },
+      "is_consolidated": {
+        "type": "boolean"
+      },
+      "rows": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "required": [
+            "seq",
+            "date",
+            "description",
+            "debit",
+            "credit",
+            "balance"
+          ],
+          "properties": {
+            "seq": {
+              "type": "integer"
+            },
+            "date": {
+              "type": "string",
+              "format": "date"
+            },
+            "datetime": {
+              "type": "string"
+            },
+            "description": {
+              "type": "string"
+            },
+            "debit": {
+              "type": "number"
+            },
+            "credit": {
+              "type": "number"
+            },
+            "before": {
+              "type": [
+                "number",
+                "null"
+              ]
+            },
+            "balance": {
+              "type": "number"
+            },
+            "charge": {
+              "type": "number"
+            },
+            "principal": {
+              "type": "number"
+            },
+            "counterparty": {
+              "type": "string"
+            },
+            "source_account": {
+              "type": "string"
+            },
+            "reference": {
+              "type": "string"
+            },
+            "pages": {
+              "type": "string"
+            },
+            "statement": {
+              "type": "string"
+            },
+            "account": {
+              "type": "string"
+            },
+            "file": {
+              "type": "string"
+            },
+            "section": {
+              "type": "string"
+            },
+            "category": {
+              "type": "string"
+            },
+            "provenance": {
+              "type": "string"
+            },
+            "review_type": {
+              "type": "string"
+            },
+            "question": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,28 +1,98 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "SmallBusinessBooksData",
-  "description": "Normalized contract between bank statement extraction (reconcile_ledger.py) and reporting generators (build_all.py).",
+  "description": "Normalized contract between bank statement reconciliation (reconcile_ledger.py) and reporting generators (build_all.py).",
   "type": "object",
-  "required": ["documents", "raw", "ledger", "transfers", "review"],
+  "required": [
+    "documents",
+    "raw",
+    "ledger",
+    "duplicates",
+    "transfers",
+    "review",
+    "issues"
+  ],
   "properties": {
     "documents": {
       "type": "array",
       "items": {
         "type": "object",
-        "required": ["id", "file"],
+        "required": [
+          "id",
+          "file"
+        ],
         "properties": {
-          "id": { "type": "string" },
-          "file": { "type": "string" },
-          "account": { "type": "string" },
-          "currency": { "type": "string" },
-          "owner": { "type": "string" },
-          "start": { "type": "string", "format": "date" },
-          "end": { "type": "string", "format": "date" },
-          "opening": { "type": "number" },
-          "closing": { "type": "number" },
-          "credits": { "type": "number" },
-          "debits": { "type": "number" },
-          "is_consolidated": { "type": "boolean" }
+          "id": {
+            "type": "string"
+          },
+          "file": {
+            "type": "string"
+          },
+          "sha256": {
+            "type": "string"
+          },
+          "encrypted": {
+            "type": "boolean"
+          },
+          "error": {
+            "type": "string"
+          },
+          "account": {
+            "type": "string"
+          },
+          "currency": {
+            "type": "string"
+          },
+          "owner": {
+            "type": "string"
+          },
+          "start": {
+            "type": "string",
+            "format": "date"
+          },
+          "end": {
+            "type": "string",
+            "format": "date"
+          },
+          "opening": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "closing": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "credits": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "debits": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "is_consolidated": {
+            "type": "boolean"
+          },
+          "running_breaks": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            }
+          },
+          "reordered": {
+            "type": "integer"
+          },
+          "ending_diff": {
+            "type": "number"
+          }
         }
       }
     },
@@ -30,23 +100,64 @@
       "type": "array",
       "items": {
         "type": "object",
-        "required": ["raw_id", "statement", "seq", "date", "account", "description", "debit", "credit", "balance"],
+        "required": [
+          "raw_id",
+          "statement",
+          "seq",
+          "date",
+          "account",
+          "description",
+          "debit",
+          "credit",
+          "balance"
+        ],
         "properties": {
-          "raw_id": { "type": "string" },
-          "statement": { "type": "string" },
-          "seq": { "type": "integer" },
-          "date": { "type": "string", "format": "date" },
-          "datetime": { "type": "string" },
-          "account": { "type": "string" },
-          "description": { "type": "string" },
-          "debit": { "type": "number" },
-          "credit": { "type": "number" },
-          "balance": { "type": "number" },
-          "charge": { "type": "number" },
-          "counterparty": { "type": "string" },
-          "source_account": { "type": "string" },
-          "reference": { "type": "string" },
-          "pages": { "type": "string" }
+          "raw_id": {
+            "type": "string"
+          },
+          "statement": {
+            "type": "string"
+          },
+          "seq": {
+            "type": "integer"
+          },
+          "date": {
+            "type": "string",
+            "format": "date"
+          },
+          "datetime": {
+            "type": "string"
+          },
+          "account": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "debit": {
+            "type": "number"
+          },
+          "credit": {
+            "type": "number"
+          },
+          "balance": {
+            "type": "number"
+          },
+          "charge": {
+            "type": "number"
+          },
+          "counterparty": {
+            "type": "string"
+          },
+          "source_account": {
+            "type": "string"
+          },
+          "reference": {
+            "type": "string"
+          },
+          "pages": {
+            "type": "string"
+          }
         }
       }
     },
@@ -54,19 +165,217 @@
       "type": "array",
       "items": {
         "type": "object",
-        "required": ["id", "raw_id", "date", "account", "description", "component", "amount", "section", "category"],
+        "required": [
+          "id",
+          "raw_id",
+          "date",
+          "account",
+          "description",
+          "component",
+          "amount",
+          "section",
+          "category"
+        ],
         "properties": {
-          "id": { "type": "string" },
-          "raw_id": { "type": "string" },
-          "date": { "type": "string", "format": "date" },
-          "account": { "type": "string" },
-          "description": { "type": "string" },
-          "component": { "enum": ["Principal", "Embedded fee"] },
-          "amount": { "type": "number" },
-          "section": { "type": "string" },
-          "category": { "type": "string" },
-          "transfer_id": { "type": "string" },
-          "question": { "type": "string" }
+          "id": {
+            "type": "string"
+          },
+          "raw_id": {
+            "type": "string"
+          },
+          "date": {
+            "type": "string",
+            "format": "date"
+          },
+          "account": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "component": {
+            "enum": [
+              "Principal",
+              "Embedded fee"
+            ]
+          },
+          "amount": {
+            "type": "number"
+          },
+          "section": {
+            "type": "string"
+          },
+          "category": {
+            "type": "string"
+          },
+          "provenance": {
+            "type": "string"
+          },
+          "transfer_id": {
+            "type": "string"
+          },
+          "question": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "duplicates": {
+      "type": "array"
+    },
+    "transfers": {
+      "type": "array"
+    },
+    "review": {
+      "type": "array"
+    },
+    "issues": {
+      "type": "array"
+    },
+    "vdc_report": {
+      "type": "object",
+      "required": [
+        "reference_version",
+        "deltas",
+        "unverified_range",
+        "verdict",
+        "attribution"
+      ],
+      "properties": {
+        "reference_version": {
+          "type": "string"
+        },
+        "deltas": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "check_id",
+              "property",
+              "expected",
+              "measured",
+              "delta",
+              "tolerance",
+              "provenance",
+              "status"
+            ],
+            "properties": {
+              "check_id": {
+                "type": "string"
+              },
+              "property": {
+                "type": "string"
+              },
+              "expected": {
+                "type": [
+                  "number",
+                  "string",
+                  "null"
+                ]
+              },
+              "measured": {
+                "type": [
+                  "number",
+                  "string",
+                  "null"
+                ]
+              },
+              "delta": {
+                "type": [
+                  "number",
+                  "null"
+                ]
+              },
+              "tolerance": {
+                "type": [
+                  "number",
+                  "null"
+                ]
+              },
+              "provenance": {
+                "type": "string",
+                "enum": [
+                  "statement_header_control",
+                  "input_premeasurement",
+                  "specification",
+                  "owner_confirmed",
+                  "statement_narration_rule",
+                  "matched_transfer_pair",
+                  "embedded_fee_split",
+                  "unclassified_default",
+                  "downgraded_unverified_claim",
+                  "synthetic_fixture"
+                ]
+              },
+              "status": {
+                "type": "string",
+                "enum": [
+                  "pass",
+                  "fail",
+                  "unknown"
+                ]
+              },
+              "notes": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "unverified_range": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "verdict": {
+          "type": "object",
+          "required": [
+            "math_integrity",
+            "accounting_completeness"
+          ],
+          "properties": {
+            "math_integrity": {
+              "type": "string",
+              "enum": [
+                "VERIFIED",
+                "FAILED",
+                "UNRESOLVED"
+              ]
+            },
+            "accounting_completeness": {
+              "type": "string",
+              "enum": [
+                "VERIFIED",
+                "PROVISIONAL_REVIEW_REQUIRED"
+              ]
+            }
+          }
+        },
+        "attribution": {
+          "type": "object",
+          "required": [
+            "state",
+            "grounds"
+          ],
+          "properties": {
+            "state": {
+              "type": "string",
+              "enum": [
+                "none",
+                "artifact",
+                "reference",
+                "instrument",
+                "provenance",
+                "unresolved"
+              ]
+            },
+            "grounds": {
+              "type": "string"
+            },
+            "next_measurement": {
+              "type": "string"
+            }
+          }
         }
       }
     }
